@@ -1,4 +1,4 @@
-# Noticeiro
+# Noticeiro [WORK-IN-PROGRESS]
 
 Este é o Noticeiro, um super agregador de blogs e notícias.
 
