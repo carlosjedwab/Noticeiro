@@ -1,3 +1,5 @@
-# Projeto 1 - Super agregador de blogs e notícias
+# Noticeiro
 
-Projeto da matéria MAC-0321
+Este é o Noticeiro, um super agregador de blogs e notícias.
+
+Projeto "Super agregador de blogs enotícias" da matéria MAC0321 - USP.
