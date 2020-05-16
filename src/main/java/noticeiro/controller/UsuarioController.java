@@ -35,7 +35,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, path="/forms")
-	public RedirectView insertUsuarioPeloForms(@ModelAttribute(value="usuario") Usuario usuario) {
+	public RedirectView insertUsuarioPeloForms(Usuario usuario) {
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		usuarioService.insertUsuario(usuario);
 		return new RedirectView("login", true);
