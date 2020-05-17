@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>Faça seu cadastro!</h1>
-	<form th:action="@{/forms}" th:object="${user}" method="post">
+	<form th:action="@{/forms}" method="post">
             <div><label> Username : <input type="text" name="username"/> </label></div>
             <div><label> Senha: <input type="password" name="password"/> </label></div>
             <div><input type="submit" value="Cadastrar-se"/></div>

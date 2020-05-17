@@ -42,9 +42,10 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/{username}/links")
-	public void insertLink(@RequestBody Link link, 
+	public RedirectView insertLink(Link link, 
 						   @PathVariable("username") String usernameDoUsuario) {
 		usuarioService.insertLink(link, usernameDoUsuario);
+		return new RedirectView("/feed", true);
 	}
 	
 	// GET methods

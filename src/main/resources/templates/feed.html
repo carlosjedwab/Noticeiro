@@ -6,6 +6,10 @@
     </head>
     <body>
         <h1 th:inline="text">Bem vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</h1>
+        <form th:action="@{/{username}/links(username=${#httpServletRequest.remoteUser})}" method="post">
+        	<div><label> Inserir link : <input type="text" name="url"/> </label></div>
+        	<div><input type="submit" value="Inserir link"/></div>
+        </form>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Desconectar"/>
         </form>
