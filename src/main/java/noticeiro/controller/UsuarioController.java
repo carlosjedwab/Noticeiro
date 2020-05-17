@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -48,10 +47,15 @@ public class UsuarioController {
 		return new RedirectView("login", true);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/feed")
-    public RedirectView insertLink(Link link){
+	@RequestMapping(method = RequestMethod.POST, path = "/feed/newlink")
+    public RedirectView insertLink(Link link) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
+        
+        if (usuarioService.urlJaRegistrado(link.getUrl(), username)) {
+        	return new RedirectView("/feed?url_error", true);
+        }
+        
         usuarioService.insertLink(link, username);
         return new RedirectView("/feed", true);
     }
@@ -75,7 +79,7 @@ public class UsuarioController {
 		usuarioService.deleteUsuarioById(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/delete")
+	@RequestMapping(method = RequestMethod.POST, path = "/feed/delete")
 	public RedirectView deleteLinkDoUsuario(String url) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
