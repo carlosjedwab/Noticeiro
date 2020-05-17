@@ -6,7 +6,7 @@
     </head>
     <body>
         <h1 th:inline="text">Bem vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/{username}/links(username=${#httpServletRequest.remoteUser})}" method="post">
+        <form th:action="@{/feed}" method="post">
         	<div><label> Inserir link : <input type="text" name="url"/> </label></div>
         	<div><input type="submit" value="Inserir link"/></div>
         </form>
@@ -17,7 +17,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>URL</th>
+                    <th> Lista de URLs </th>
                 </tr>
             </thead>
 
@@ -26,7 +26,14 @@
                     <td colspan="2"> No URL Available </td>
                 </tr>
                 <tr th:each="link : ${links}">
-                    <td><span th:text="${link.url}"> URL </span></td>
+                    <td><span th:text="${link.url}"> URL </span>
+                    <form th:action="@{/delete}" th:method="post">
+                    	<input type="hidden" name="url" th:value=${link.url} />
+                    	<input type="submit" value="Excluir" class="btn btn-danger" />
+                    </form>
+                    <!--<form>	
+                    	<input type="checkbox" name="Ativado"></label><br></td>
+                    </form>-->
                 </tr>
             </tbody>
 
