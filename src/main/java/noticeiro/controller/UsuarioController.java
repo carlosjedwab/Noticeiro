@@ -75,10 +75,12 @@ public class UsuarioController {
 		usuarioService.deleteUsuarioById(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, path = "{username}/links")
-	public void deleteLinkDoUsuario(@RequestParam(value = "url", defaultValue = "") String url,
-									@PathVariable("username") String username) {
+	@RequestMapping(method = RequestMethod.POST, path = "/delete")
+	public RedirectView deleteLinkDoUsuario(String url) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
 		usuarioService.deleteUrlDoUsuario(url, username);
+		return new RedirectView("/feed", true);
 	}
 	
 	// PUT methods

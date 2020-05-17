@@ -39,6 +39,7 @@ public class UsuarioService {
 		for(Link link: usuario.getLinks()) {
 			if(link.getUrl().contentEquals(url)) {
 				usuario.getLinks().remove(link);
+				break;
 			}
 		}
 		repository.save(usuario);
