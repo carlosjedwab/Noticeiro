@@ -13,5 +13,23 @@
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Desconectar"/>
         </form>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>URL</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:if="${links.empty}">
+                    <td colspan="2"> No URL Available </td>
+                </tr>
+                <tr th:each="link : ${links}">
+                    <td><span th:text="${link.url}"> URL </span></td>
+                </tr>
+            </tbody>
+
+        </table>
     </body>
 </html>

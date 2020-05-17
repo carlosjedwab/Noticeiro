@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,15 +61,13 @@ public class UsuarioController {
 		return usuarioService.getUsuarioByUsername(username);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/{username}/links")
-	public List<String> getUrlsDoUsuario(@PathVariable("username") String username){
-		List<Link> links = usuarioService.getUsuarioByUsername(username).getLinks();
-		List<String> urls = new ArrayList<>();
-		for(Link link: links) {
-			urls.add(link.getUrl());
-		}
-		return urls;
-	}
+	@ModelAttribute("links")
+    @RequestMapping(method = RequestMethod.GET, path = "/feed")
+    public List<Link> getListaUrl(){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        return usuarioService.getUsuarioByUsername(username).getLinks();
+    }
 	
 	// DELETE methods
 	@RequestMapping(method = RequestMethod.DELETE, path = "/api/usuario/{id}")
