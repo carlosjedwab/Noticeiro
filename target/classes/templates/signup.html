@@ -10,7 +10,9 @@
 	
 		<img th:src="@{images/avatar.png}" class = "avatar">
 			<h1> Faça seu cadastro! </h1>
-					
+			<div th:if="${param.username_error}" class = "username_error">
+				Username já registrado.
+			</div>
 			<form th:action="@{/forms}" method="post">
             	
             	<p> Usuário </p>

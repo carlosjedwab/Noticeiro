@@ -1,6 +1,5 @@
 package noticeiro.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,23 +37,24 @@ public class UsuarioController {
 	
 	@RequestMapping(method = RequestMethod.POST, path="/forms")
 	public RedirectView insertUsuarioPeloForms(Usuario usuario) {
+		String username = usuario.getUsername();
+		
+		if(usuarioService.usernameJaRegistrado(username)) {
+			return new RedirectView("signup?username_error", true);
+		}
+		
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		usuarioService.insertUsuario(usuario);
 		return new RedirectView("login", true);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/{username}/links")
-	public RedirectView insertLink(Link link, 
-						   @PathVariable("username") String usernameDoUsuario) {
-		usuarioService.insertLink(link, usernameDoUsuario);
-		return new RedirectView("/feed", true);
-	}
-	
-	// GET methods
-	@RequestMapping(method = RequestMethod.GET, path = "api/usuario")
-	public List<Usuario> getTodosUsuarios(){
-		return usuarioService.getTodosUsuarios();
-	}
+	@RequestMapping(method = RequestMethod.POST, path = "/feed")
+    public RedirectView insertLink(Link link){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        usuarioService.insertLink(link, username);
+        return new RedirectView("/feed", true);
+    }
 	
 	@RequestMapping(method = RequestMethod.GET, path = "api/usuario/{username}")
 	public Usuario getUsuarioByUsername(@PathVariable("username") String username) {
@@ -63,7 +63,7 @@ public class UsuarioController {
 	
 	@ModelAttribute("links")
     @RequestMapping(method = RequestMethod.GET, path = "/feed")
-    public List<Link> getListaUrl(){
+    public List<Link> getListaLinks(){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
         return usuarioService.getUsuarioByUsername(username).getLinks();

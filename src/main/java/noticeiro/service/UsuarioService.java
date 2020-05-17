@@ -1,7 +1,5 @@
 package noticeiro.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +20,14 @@ public class UsuarioService {
 		return repository.findByUsername(username);
 	}
 	
-	public List<Usuario> getTodosUsuarios(){
-		return repository.findAll();
+	// Possivel problema de performance
+	public boolean usernameJaRegistrado(String username) {
+		for(Usuario usuario: repository.findAll()) {
+			if(usuario.getUsername().contentEquals(username)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void deleteUsuarioById(String id) {
