@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+*{
+	box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  padding: 10px;
+  background: #f1f1f1;
+}
+
+.header {
+  padding: 30px;
+  text-align: center;
+  background: white;
+}
+
+.header h1 {
+  font-size: 50px;
+}
+
+/* Footer */
+.footer {
+	
+  font-size: 10px;
+  text-align: center;
+  background: #ddd;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width:100%;
+}
+
+.link{
+  padding: 10px;
+  text-align: center;
+  background: #F0F8FF;
+  margin: 15px;
+  width:30%;
+  float: left;
+}
