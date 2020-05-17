@@ -3,9 +3,40 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Noticeiro - Login </title>
-    </head>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+ 	</head>
     <body>
-    	<h1>Faça seu login!</h1>
+		<div class = "loginbox">
+		
+			<img th:src="@{images/avatar.png}" class = "avatar">
+				<h1> Faça seu login </h1>
+        <div th:if="${param.error}" class = "error">
+            Dados inválidos. Tente novamente.
+        </div>
+       
+        <div th:if="${param.logout}" class = "logout">
+            Você desconectou-se com sucesso.
+       
+        </div>
+        
+        <form th:action="@{/login}" method="post">
+        	<p> Usuário </p>
+            <div><label> <input type="text" name="username" placeholder = "Entre seu usuário"/> </label></div>
+            <p> Senha </p>
+            <div><label> <input type="password" name="password" placeholder = "Entre sua senha"/> </label></div>
+            <div><input type="submit" value="Entrar"/></div>
+        </form>
+       
+        <a th:href="@{signup}"> Não possui conta? </a>
+		
+		</div>
+
+
+
+
+
+
+<!--     	<h1>Faça seu login!</h1>
         <div th:if="${param.error}">
             Dados inválidos.
         </div>
@@ -17,6 +48,6 @@
             <div><label> Senha: <input type="password" name="password"/> </label></div>
             <div><input type="submit" value="Sign In"/></div>
         </form>
-        <a th:href="@{signup}"> Cadastrar-se  </a>
+        <a th:href="@{signup}"> Cadastrar-se  </a> -->
     </body>
 </html>

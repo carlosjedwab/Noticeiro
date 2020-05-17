@@ -3,24 +3,12 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<title>Noticeiro</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/home-true.css}" >
 </head>
 <body>
-	<div class='header'> 
-		<h1>Bem vindo ao Noticeiro!</h1>
-		<p>O Super Agregador de Notícias</p>
-	</div>
-	
-	<div class='nav'>
-		<a class='link' id='login' th:href="@{login}">Login</a>
-		<a class='link' id='signup' th:href="@{signup}">Cadastre-se</a>
-	</div>
-	
-	<a class='link' id='feed' th:href="@{feed}">Feed de notícias</a>
-	
-	<div class="footer">
-  		<h2>Footer</h2>
-	</div>
-
+	<h1>Bem vindo ao Noticeiro!</h1>
+	<h2>O Super Agregador de Notícias</h2>
+	<a th:href="@{login}">Login</a>
+	<a th:href="@{signup}">Cadastre-se</a>
+	<a th:href="@{feed}">Feed de notícias</a>
 </body>
 </html>
