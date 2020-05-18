@@ -6,9 +6,12 @@
     </head>
     <body>
         <h1 th:inline="text">Bem vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/feed}" method="post">
+        <form th:action="@{/feed/newlink}" method="post">
         	<div><label> Inserir link : <input type="text" name="url"/> </label></div>
         	<div><input type="submit" value="Inserir link"/></div>
+        	<div th:if="${param.url_error}" class = "url_error"> <!-- fazer aparecer do lado do botão inserir link -->
+				Url já existente.
+			</div>
         </form>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Desconectar"/>
@@ -27,7 +30,7 @@
                 </tr>
                 <tr th:each="link : ${links}">
                     <td><span th:text="${link.url}"> URL </span>
-                    <form th:action="@{/delete}" th:method="post">
+                    <form th:action="@{/feed/delete}" th:method="post">
                     	<input type="hidden" name="url" th:value=${link.url} />
                     	<input type="submit" value="Excluir" class="btn btn-danger" />
                     </form>

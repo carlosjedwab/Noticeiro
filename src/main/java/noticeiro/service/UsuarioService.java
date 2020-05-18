@@ -23,9 +23,19 @@ public class UsuarioService {
 	// Possivel problema de performance
 	public boolean usernameJaRegistrado(String username) {
 		for(Usuario usuario: repository.findAll()) {
-			if(usuario.getUsername().contentEquals(username)) {
+			if(usuario.getUsername().equals(username)) {
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	// Possivel problema de performance
+	public boolean urlJaRegistrado(String url, String username) {
+		for (Link link : getUsuarioByUsername(username).getLinks()) {
+			if(url.equals(link.getUrl())) {
+     			return true;
+     		}
 		}
 		return false;
 	}
