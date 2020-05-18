@@ -3,12 +3,12 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<title>Noticeiro - Cadastro</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css">
 </head>
 <body>
 	<div class = "loginbox">
 	
-		<img th:src="@{images/avatar.png}" class = "avatar">
+		<img th:src="@{images/logo1.png}" class = "avatar">
 			<h1> Faça seu cadastro! </h1>
 			<div th:if="${param.username_error}" class = "username_error">
 				Username já registrado.
