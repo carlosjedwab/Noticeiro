@@ -10,7 +10,7 @@
         <form th:action="@{/feed/newlink}" method="post">
         	<div><label> Inserir link : <input type="text" name="url"/> </label></div>
         	<div><input type="submit" value="Inserir link"/></div>
-        	<div th:if="${param.url_error}" class = "url_error"> <!-- fazer aparecer do lado do botão inserir link -->
+        	<div th:if="${param.url_error}" class = "url_error">
 				Url já existente.
 			</div>
         </form>
