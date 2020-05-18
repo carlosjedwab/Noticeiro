@@ -20,13 +20,13 @@
 body {
   font-family: Arial;
   padding: 10px;
-  background: var(--cor1);
+  background: var(--cor4);
   font-size: var(--tamanho2);
 }
 
 .nav{
 	margin:0;
-	background: var(--cor4);
+	background: var(--cor1);
  	position: fixed;
  	top: 0;
  	right:0;
