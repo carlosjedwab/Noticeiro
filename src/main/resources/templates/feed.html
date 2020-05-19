@@ -21,7 +21,10 @@
 	 	  <div class="insert_link"><label><input type="text" name="url" placeholder="Novo link"/> </label></div>
 	 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
 	 	  <div th:if="${param.url_error}" class = "url_error">
-			Url já existente.
+			URL já existente.
+	  	  </div>
+	  	  <div th:if="${param.invalid}" class = "url_error">
+			URL inválida.
 	  	  </div> 
        </form>
        </div>

@@ -13,6 +13,9 @@
 			<div th:if="${param.username_error}" class = "username_error">
 				Username já registrado.
 			</div>
+			<div th:if="${param.invalid}" class = "invalid">
+				Dados inválidos.
+			</div>
 			<form th:action="@{/forms}" method="post">
             	
             	<p> Usuário </p>
