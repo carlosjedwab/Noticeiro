@@ -12,6 +12,10 @@ public class UsuarioService {
 	@Autowired
 	UsuarioRepository repository;
 	
+	public void setRepository(UsuarioRepository repository) {
+		this.repository = repository;
+	}
+
 	public void insertUsuario(Usuario usuario) {
 		repository.save(new Usuario(usuario.getUsername(), usuario.getPassword()));
 	}

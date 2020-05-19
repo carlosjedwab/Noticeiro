@@ -3,6 +3,8 @@ package noticeiro.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,8 +14,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Usuario {
 	@Id
 	public String id;
-	
+	@NotBlank
 	public String username;
+	@NotBlank
 	public String password;
 	public List<Link> links;
 
