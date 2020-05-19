@@ -88,17 +88,17 @@ body {
   text-align: center;
   display:inline-block;
   float:center;
+  background: var(--cor3);
   color: var(--cor2);
   text-decoration: none;
   max-height: 2vw;
- 
+  border-radius: 4vw;
+  transition: 0.3s;
 }
 
 .header #feed:hover{
 	color: var(--cor1);
-	background: var(--cor2);
-	border-radius: 4vw;
-	
+	background: var(--cor5);
 }
 
 .footer {
