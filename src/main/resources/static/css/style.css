@@ -4,6 +4,8 @@
 	--cor3: #f06543;
 	--cor4: #313638;
 	--cor5: #f09d51;
+	--fontPeq: 1.25vw;
+	--tamanho3: 0.5vw;
 }
 
 
@@ -16,8 +18,9 @@ body {
 	font-family: sans-serif;
 }
 
-p{
-	font-size:  1.5vw;
+
+h2{
+	font-size: 1.5vw;
 }
 
 .label{
@@ -26,7 +29,7 @@ p{
 
 .loginbox{
 	width: 27vw;
-	height: 36vw;
+	min-height: 36vw;
 	background: var(--cor2);
 	color: var(--cor4);
 	top: 50%;
@@ -34,7 +37,7 @@ p{
 	position: absolute;
 	transform: translate(-50%,-50%);
 	box-sizing: border-box;
-	padding: 6.8vw 2.9vw;
+	padding: 6.8vw 2.9vw 1vw;
 	border-radius: 2.9vw;
 }
 
@@ -108,14 +111,22 @@ h1 {
 
 .error {
 	color: red;
+	font-size: var(--fontPeq);
 }
 
 .logout {
 	color: green;
+	font-size: var(--fontPeq);
 }
 
-
-
-
+.footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width:100%;
+  color: var(--cor2);
+  font-size: var(--tamanho3); 
+}
 
 

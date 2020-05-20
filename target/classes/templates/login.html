@@ -16,13 +16,17 @@
            		<p> Você desconectou-se com sucesso. </p> 
       		</div>
         	<form th:action="@{/login}" method="post">
-        		<p> Usuário </p>
+        		<h2> Usuário </h2>
            		<div><label> <input type="text" name="username" placeholder = "Entre seu usuário"/> </label></div>
-            	<p> Senha </p>
+            	<h2> Senha </h2>
             	<div><label> <input type="password" name="password" placeholder = "Entre sua senha"/> </label></div>
             	<div><input type="submit" value="Entrar"/></div>
        		</form>
         	<a th:href="@{signup}"> Não possui conta? </a>
+		</div>
+		
+		<div class="footer">
+  			<h3>@2020 Noticeiro - CRUSHERS OF PROJETO FINAL</h3>
 		</div>
     </body>
 </html>
