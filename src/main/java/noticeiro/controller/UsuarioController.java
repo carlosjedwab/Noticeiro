@@ -48,7 +48,11 @@ public class UsuarioController {
 		return new RedirectView("login", true);
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(method = RequestMethod.POST, path = "/feed/newlink")
+=======
+	@RequestMapping(method = RequestMethod.POST, path = "/feed/newLink")
+>>>>>>> Nova_branch
     public RedirectView insertLink(@Valid @NotNull Link link, BindingResult result) {
 		if(result.hasErrors()) {
 			return new RedirectView("/feed?invalid", true);
@@ -65,18 +69,26 @@ public class UsuarioController {
         return new RedirectView("/feed", true);
     }
 	
+<<<<<<< HEAD
 	@RequestMapping(method = RequestMethod.POST, path = "/feed/delete")
 	public RedirectView deleteLinkDoUsuario(String url) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
 		usuarioService.deleteUrlDoUsuario(url, username);
+=======
+	@RequestMapping(method = RequestMethod.POST, path = "/feed/deleteLink")
+	public RedirectView deleteLink(Link link) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+		usuarioService.deleteUrlDoUsuario(link.getUrl(), username);
+>>>>>>> Nova_branch
 		return new RedirectView("/feed", true);
 	}
 	
 	// GET methods
 	@ModelAttribute("links")
     @RequestMapping(method = RequestMethod.GET, path = "/feed")
-    public List<Link> getListaLinks(){
+    public List<Link> getListaDeLinks() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
         return usuarioService.getUsuarioByUsername(username).getLinks();

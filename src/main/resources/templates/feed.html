@@ -17,7 +17,11 @@
       
       <div class = "feed_tool">
        <div class = "new_link">
+<<<<<<< HEAD
        <form th:action="@{/feed/newlink}" method="post" class = "add">
+=======
+       <form th:action="@{/feed/newLink}" method="post" class = "add">
+>>>>>>> Nova_branch
 	 	  <div class="insert_link"><label><input type="text" name="url" placeholder="Novo link"/> </label></div>
 	 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
 	 	  <div th:if="${param.url_error}" class = "url_error">
@@ -43,7 +47,11 @@
                 </tr>
                 <tr th:each="link : ${links}">
                     <td><span th:text="${link.url}"> URL </span>
+<<<<<<< HEAD
                     <form th:action="@{/feed/delete}" th:method="post" class = "delete">
+=======
+                    <form th:action="@{/feed/deleteLink}" th:method="post" class = "delete">
+>>>>>>> Nova_branch
                     	<input type="hidden" name="url" th:value=${link.url} />
                     	<input type="image" th:src="@{images/lixo.png}" alt="submit" class="delete_button"/>
                   	</form> 
