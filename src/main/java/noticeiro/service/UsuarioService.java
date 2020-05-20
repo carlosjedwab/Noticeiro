@@ -12,6 +12,10 @@ public class UsuarioService {
 	@Autowired
 	UsuarioRepository repository;
 	
+	public void setRepository(UsuarioRepository repository) {
+		this.repository = repository;
+	}
+
 	public void insertUsuario(Usuario usuario) {
 		repository.save(new Usuario(usuario.getUsername(), usuario.getPassword()));
 	}
@@ -23,9 +27,19 @@ public class UsuarioService {
 	// Possivel problema de performance
 	public boolean usernameJaRegistrado(String username) {
 		for(Usuario usuario: repository.findAll()) {
-			if(usuario.getUsername().contentEquals(username)) {
+			if(usuario.getUsername().equals(username)) {
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	// Possivel problema de performance
+	public boolean urlJaRegistrado(String url, String username) {
+		for (Link link : getUsuarioByUsername(username).getLinks()) {
+			if(url.equals(link.getUrl())) {
+     			return true;
+     		}
 		}
 		return false;
 	}

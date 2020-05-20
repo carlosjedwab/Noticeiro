@@ -3,12 +3,14 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<title>Noticeiro</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/home-true.css}" >
+	<link rel="stylesheet" type="text/css" th:href="@{/css/home-true.css}" href="../static/css/home-true.css" >
 </head>
 <body>
 	<div class='header'> 
+		<img th:src="@{images/N.png}"  src="../static/images/N.png" class = "logo">
 		<h1>Bem vindo ao Noticeiro!</h1>
 		<p>O Super Agregador de Notícias</p>
+		<a class='link' id='feed' th:href="@{feed}">Acesse o Feed</a>
 	</div>
 	
 	<div class='nav'>
@@ -16,10 +18,10 @@
 		<a class='link' id='signup' th:href="@{signup}">Cadastre-se</a>
 	</div>
 	
-	<a class='link' id='feed' th:href="@{feed}">Feed de notícias</a>
+	
 	
 	<div class="footer">
-  		<h2>Footer</h2>
+  		<h2>@2020 Noticeiro - CRUSHERS OF PROJETO FINAL</h2>
 	</div>
 
 </body>

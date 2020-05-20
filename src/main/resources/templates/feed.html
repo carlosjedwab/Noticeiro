@@ -4,39 +4,55 @@
     <head>
         <title>Noticeiro - Feed</title>
     </head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/feed_style.css}" href="../static/css/feed_style.css">
     <body>
         <h1 th:inline="text">Bem vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/feed}" method="post">
-        	<div><label> Inserir link : <input type="text" name="url"/> </label></div>
-        	<div><input type="submit" value="Inserir link"/></div>
-        </form>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Desconectar"/>
-        </form>
+     
+     <div class="header">
+     	   <form th:action="@{/logout}" method="post" class="logout">
+            <input type="image" th:src="@{images/logout.png}" alt="submit" class="logout_button"/>
+        	</form>
+     </div>
+     
+      
+      <div class = "feed_tool">
+       <div class = "new_link">
+       <form th:action="@{/feed/newLink}" method="post" class = "add">
+	 	  <div class="insert_link"><label><input type="text" name="url" placeholder="Novo link"/> </label></div>
+	 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
+	 	  <div th:if="${param.url_error}" class = "url_error">
+			URL já existente.
+	  	  </div>
+	  	  <div th:if="${param.invalid}" class = "url_error">
+			URL inválida.
+	  	  </div> 
+       </form>
+       </div>
         
-        <table>
+        <div class ="filter">
+        <table class = "tabela_links">
             <thead>
                 <tr>
-                    <th> Lista de URLs </th>
+                    <th> Lista de URLs
+                    </th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr th:if="${links.empty}">
-                    <td colspan="2"> No URL Available </td>
+                    <td> Não há links cadastrados </td>
                 </tr>
                 <tr th:each="link : ${links}">
                     <td><span th:text="${link.url}"> URL </span>
-                    <form th:action="@{/delete}" th:method="post">
+                    <form th:action="@{/feed/deleteLink}" th:method="post" class = "delete">
                     	<input type="hidden" name="url" th:value=${link.url} />
-                    	<input type="submit" value="Excluir" class="btn btn-danger" />
-                    </form>
-                    <!--<form>	
-                    	<input type="checkbox" name="Ativado"></label><br></td>
-                    </form>-->
-                </tr>
+                    	<input type="image" th:src="@{images/lixo.png}" alt="submit" class="delete_button"/>
+                  	</form> 
+                	</td>	
+                </tr>     
             </tbody>
-
         </table>
+   		</div>
+  	 </div>
+   
     </body>
 </html>

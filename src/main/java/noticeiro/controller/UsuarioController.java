@@ -2,17 +2,19 @@ package noticeiro.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -29,14 +31,12 @@ public class UsuarioController {
 	UsuarioService usuarioService;
 	
 	// POST methods
-	@RequestMapping(method = RequestMethod.POST, path="api/usuario")
-	public void insertUsuario(@RequestBody Usuario usuario) {
-		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-		usuarioService.insertUsuario(usuario);
-	}
-	
 	@RequestMapping(method = RequestMethod.POST, path="/forms")
-	public RedirectView insertUsuarioPeloForms(Usuario usuario) {
+	public RedirectView insertUsuarioPeloForms(@Valid @NotNull Usuario usuario, BindingResult result) {
+		if(result.hasErrors()) {
+			return new RedirectView("signup?invalid", true);
+		}
+		
 		String username = usuario.getUsername();
 		
 		if(usuarioService.usernameJaRegistrado(username)) {
@@ -48,22 +48,35 @@ public class UsuarioController {
 		return new RedirectView("login", true);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/feed")
-    public RedirectView insertLink(Link link){
+	@RequestMapping(method = RequestMethod.POST, path = "/feed/newLink")
+    public RedirectView insertLink(@Valid @NotNull Link link, BindingResult result) {
+		if(result.hasErrors()) {
+			return new RedirectView("/feed?invalid", true);
+		}
+		
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
+        
+        if (usuarioService.urlJaRegistrado(link.getUrl(), username)) {
+        	return new RedirectView("/feed?url_error", true);
+        }
+        
         usuarioService.insertLink(link, username);
         return new RedirectView("/feed", true);
     }
 	
-	@RequestMapping(method = RequestMethod.GET, path = "api/usuario/{username}")
-	public Usuario getUsuarioByUsername(@PathVariable("username") String username) {
-		return usuarioService.getUsuarioByUsername(username);
+	@RequestMapping(method = RequestMethod.POST, path = "/feed/deleteLink")
+	public RedirectView deleteLink(Link link) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+		usuarioService.deleteUrlDoUsuario(link.getUrl(), username);
+		return new RedirectView("/feed", true);
 	}
 	
+	// GET methods
 	@ModelAttribute("links")
     @RequestMapping(method = RequestMethod.GET, path = "/feed")
-    public List<Link> getListaLinks(){
+    public List<Link> getListaDeLinks() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
         return usuarioService.getUsuarioByUsername(username).getLinks();
@@ -75,15 +88,6 @@ public class UsuarioController {
 		usuarioService.deleteUsuarioById(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/delete")
-	public RedirectView deleteLinkDoUsuario(String url) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = userDetails.getUsername();
-		usuarioService.deleteUrlDoUsuario(url, username);
-		return new RedirectView("/feed", true);
-	}
-	
-	// PUT methods
 	
 	
 }
