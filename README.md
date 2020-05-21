@@ -67,7 +67,7 @@ __IMPORTANTE__:
 se os testes forem executados no mesmo banco de dados onde existem usuários cadastrados, eles serão perdidos. Isto pode ser evitado alterando-se
 o banco de dados utilizado na hora de rodar os testes, o que pode ser feito mudando a linha de configuração ```spring.data.mongodb.database=testdb```, trocando o __testdb__ para outro nome, assim, o MongoDB utilizará um banco separado na hora dos testes.
 
-## Imagens do Notceiro
+## Imagens do Noticeiro
 ### Home
 ![Home](https://i.ibb.co/f2t3PXG/Screenshot-from-2020-05-21-16-21-42.png)
 ### Cadastro
