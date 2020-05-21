@@ -25,7 +25,7 @@ com ele para armazenamento dos dados.
 * Com o MongoDB instalado, abra um terminal e digite o seguinte comando: ```mongod```
 * Com isto, o MongoDB deverá estar rodando e conectado ao localhost na porta 27017
 * __IMPORTANTE__: O MongoDB reserva uma pasta para armazenamento dos dados. No Linux, o padrão é a pasta "/data/db",
-porém, ao executá-lo pela primeira vez, provavelmente esta pasta não existirá e precisará ser criada. Após ser criada,
+porém, ao executá-lo pela primeira vez, talvez esta pasta não existirá e você precisará cria-la. Após ser criada,
 é possível que o MongoDB não consiga permissão para acessá-la, devido ser uma pasta criada na root do sistema, neste caso
 será necessário alterar as permissões de acesso para a pasta.
 
