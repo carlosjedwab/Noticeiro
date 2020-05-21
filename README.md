@@ -54,7 +54,7 @@ spring.data.mongodb.host=localhost
 spring.data.mongodb.port=27017
 spring.data.mongodb.database=testdb
 ```
-Isto é, por padrão, o MongoDB roda no __localhost__, na porta __27017__ e o nome do banco de dados é __testdb__
+Isto é, por padrão, a conexão com o MongoDB é feita no __localhost__, na porta __27017__ e o nome do banco de dados é __testdb__
 
 ## Testes do JUnit
 Na versão atual, o web app conta com uma bateria simples de testes do JUnit, testando os principais métodos do código.
