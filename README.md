@@ -36,15 +36,15 @@ sudo chown -R $USER /data/db
 
 ### Execução do projeto
 Com o MongoDB em funcionamento, há duas maneiras de executar o projeto:
-* Primeira maneira - Execução através do projeto compilado em um .jar
+* Primeira maneira - Execução por meio do projeto compilado em um .jar
     * Nos arquivos do projeto, navegue até a pasta __build__, onde você encontrará o arquivo __noticeiro-v1.jar__
     * Abra o terminal e digite o seguinte comando: ```java -jar noticeiro-v1.jar```
-    * Com isto, o projeto estará sendo executado e o site poderá ser acessado através da url __localhost:8080__
-* Segunda maneira - Execução através do Eclipse
+    * Com isto, o projeto estará sendo executado e o site poderá ser acessado por meio da url __localhost:8080__
+* Segunda maneira - Execução por meio do Eclipse
     * Instale o Plugin [Spring Tools 4](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
     * Importe o projeto no Eclipse
     * Clique com o botão direito na pasta principal do projeto e execute o comando __Run as -> Spring Boot Application__
-    * Com isto, o projeto estará sendo executado e o site poderá ser acessado através da url __localhost:8080__
+    * Com isto, o projeto estará sendo executado e o site poderá ser acessado por meio da url __localhost:8080__
 
 ## Configuração da conexão com o banco de dados
 As configurações da conexão do web app com o banco de dados podem ser encontradas no arquivo
