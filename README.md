@@ -28,6 +28,11 @@ com ele para armazenamento dos dados.
 porém, ao executá-lo pela primeira vez, talvez esta pasta não existirá e você precisará criá-la. Após ser criada,
 é possível que o MongoDB não consiga permissão para acessá-la, devido ser uma pasta criada na root do sistema, neste caso
 será necessário alterar as permissões de acesso para a pasta.
+* No Linux, os dois problemas acima podem ser resolvidos com os seguintes comandos:
+```
+sudo mkdir -p /data/db
+sudo chown -R $USER /data/db
+```
 
 ### Execução do projeto
 Com o MongoDB em funcionamento, há duas maneiras de executar o projeto:
