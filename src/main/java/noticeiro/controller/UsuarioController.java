@@ -48,7 +48,7 @@ public class UsuarioController {
 		return new RedirectView("login", true);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/feed/newLink")
+	@RequestMapping(method = RequestMethod.POST, path = "/feed/links/add")
     public RedirectView insertLink(@Valid @NotNull Link link, BindingResult result) {
 		if(result.hasErrors()) {
 			return new RedirectView("/feed?invalid", true);
@@ -65,7 +65,7 @@ public class UsuarioController {
         return new RedirectView("/feed", true);
     }
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/feed/deleteLink")
+	@RequestMapping(method = RequestMethod.POST, path = "/feed/links/delete")
 	public RedirectView deleteLink(Link link) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();

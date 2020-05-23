@@ -1,0 +1,100 @@
+:root {
+	--navbar_color: #100006;
+	--text_normal_color: #100006;
+	--text_hover_color: #e6e8e6;
+	--button_alt1_color: #f06543;
+	--button_alt2_color: #f09d51;
+	
+	--message_size: 1.25vw;
+	--nav_button_text_size: 1.2vw;
+	--navbar_height: 3vw;
+}
+
+.nav {
+	margin:0;
+	background: var(--navbar_color);
+ 	position: fixed;
+ 	top: 0;
+ 	right:0;
+ 	width:100%;
+ 	height: var(--navbar_height);
+ 	
+}
+
+.nav a {
+	position: relative;
+	top: 0.5vw;	
+	float: left;
+	max-height: 2vw;
+	padding: 0.4vw;
+	/*border-left-style: solid; 
+	border-width: thin;*/
+	border-radius: 4vw;
+	color: var(--text_normal_color);
+	font-family: Arial;
+	font-size: var(--nav_button_text_size);
+	text-decoration: none;
+	text-align: center;
+	
+}
+
+.nav a:hover {
+	color: var(--text_hover_color);
+}
+
+.logout_button {
+	float: right;
+	margin-top: calc(var(--navbar_height) / 5);
+	margin-left: 0.5vw;
+	height: 2vw;
+	width: 2vw;
+	filter: invert(100%) sepia(0%) saturate(7458%) hue-rotate(178deg) brightness(106%) contrast(101%);
+}
+.logout_button:hover {
+	filter: invert(72%) sepia(73%) saturate(979%) hue-rotate(324deg) brightness(102%) contrast(88%);
+}
+
+#login_button {
+	background: var(--button_alt2_color);
+}
+
+#signup_button {
+	background: var(--button_alt1_color);
+	left: 1vw;
+}
+
+#home_button {
+	background: var(--button_alt1_color);
+}
+
+.username_message {
+	float: right;
+	color: green;
+	font-family: Arial;
+	font-size: var(--message_size);
+}
+
+.logout_message {
+	float: right;
+	color: green;
+	font-family: Arial;
+	font-size: var(--message_size);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,25 +4,37 @@
     <head>
         <title>Noticeiro - Login </title>
         <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" href="../static/css/navbar.css" >
  	</head>
     <body>
+    	<div class="nav">
+			<a class='link' id='home_button' th:href="@{home}">Home</a>
+				<div sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="post" class="logout">
+		          		<input type="image" th:src="@{images/logout.png}" alt="submit" class="logout_button"/>
+		       		</form>
+					<p class = "username_message"> Você está logado como [[${#httpServletRequest.remoteUser}]]!</p> 
+		   		</div>
+	    </div>
+	    
 		<div class = "loginbox">
 			<img th:src="@{images/logo1.png}" class = "avatar">
 			<h1> Faça seu login </h1>
-      		<div th:if="${param.error}" class = "error">
+      		<div th:if="${param.error}" class = "forms_error">
            		<p> Dados inválidos. Tente novamente. </p>
        		</div>
-       		<div th:if="${param.logout}" class = "logout">
-           		<p> Você desconectou-se com sucesso. </p> 
-      		</div>
         	<form th:action="@{/login}" method="post">
-        		<p> Usuário </p>
+        		<h2> Usuário </h2>
            		<div><label> <input type="text" name="username" placeholder = "Entre seu usuário"/> </label></div>
-            	<p> Senha </p>
+            	<h2> Senha </h2>
             	<div><label> <input type="password" name="password" placeholder = "Entre sua senha"/> </label></div>
             	<div><input type="submit" value="Entrar"/></div>
        		</form>
         	<a th:href="@{signup}"> Não possui conta? </a>
+		</div>
+		
+		<div class="footer">
+  			<h3>@2020 CRUSHERS OF PROJETO FINAL - Noticeiro</h3>
 		</div>
     </body>
 </html>

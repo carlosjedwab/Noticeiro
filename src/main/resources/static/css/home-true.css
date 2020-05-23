@@ -24,46 +24,6 @@ body {
   font-size: var(--tamanho2);
 }
 
-.nav{
-	margin:0;
-	background: var(--cor1);
- 	position: fixed;
- 	top: 0;
- 	right:0;
- 	width:100%;
- 	height: 3vw;
-}
-
-.nav a{
-	position: relative;
-	top: 0.5vw;
-	background: var(--cor3);	
-	float:right;
-	max-height: 2vw;
-	padding:0.4vw;
-	/*border-left-style: solid; 
-	border-width: thin;*/
-	color: var(--cor1);
-	border-radius: 4vw;
-	font-size: var(--tamanho2);
-	text-decoration: none;
-	text-align: center;
-	
-}
-
-#signup{
-	position: relative;
-	right: 1vw;
-}
-
-#login{
-	background: var(--cor5);
-}
-
-.nav a:hover {
-	color: var(--cor2);
-}
-
 .header {
  	text-align: center;
 	top: 50%;

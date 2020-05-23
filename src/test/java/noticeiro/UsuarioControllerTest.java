@@ -1,27 +1,26 @@
 package noticeiro;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.MethodMode;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import noticeiro.dao.UsuarioRepository;
-import noticeiro.model.Link;
 import noticeiro.service.AuthenticationService;
 import noticeiro.service.UsuarioService;
 
@@ -32,7 +31,7 @@ class UsuarioControllerTest {
 	@Autowired
 	UsuarioService usuarioService;
 	
-	@Autowired
+	@Mock
 	UsuarioRepository repository;
 	
 	@Autowired
@@ -70,7 +69,7 @@ class UsuarioControllerTest {
 	@WithMockUser(username_do_user)
 	void testNewLink() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-			.post("/feed/newLink")
+			.post("/feed/links/add")
 			.param("url", url_do_site1));
 		
 		assertTrue(usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
@@ -80,10 +79,10 @@ class UsuarioControllerTest {
 	@WithMockUser(username_do_user)
 	void testDeleteLink() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-			.post("/feed/newLink")
+			.post("/feed/links/add")
 			.param("url", url_do_site1));
 		mvc.perform(MockMvcRequestBuilders
-			.post("/feed/deleteLink")
+			.post("/feed/links/delete")
 			.param("url", url_do_site1));
 		
 		assertTrue(!usuarioService.urlJaRegistrado(url_do_site1, username_do_user));

@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-	<title>Noticeiro - Cadastro</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css">
-</head>
-<body>
-	<div class = "loginbox">
-	
-		<img th:src="@{images/logo1.png}" class = "avatar">
-			<h1> Faça seu cadastro! </h1>
-			<div th:if="${param.username_error}" class = "username_error">
-				Username já registrado.
-			</div>
-			<div th:if="${param.invalid}" class = "invalid">
-				Dados inválidos.
-			</div>
-			<form th:action="@{/forms}" method="post">
-            	
-            	<p> Usuário </p>
-            	<div><label><input type="text" name="username" placeholder="Escolha seu usuário"/> </label></div>
-            	<p> Senha </p>
-            	<div><label><input type="password" name="password" placeholder="Escolha sua senha"/> </label></div>
-            	<div><input type="submit" value="Cadastrar-se"/></div>
-    		</form>
-	
-			<a th:href="@{login}"> Já possui conta? </a>
+	<head>
+		<title>Noticeiro - Cadastro</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" href="../static/css/navbar.css" >
+	</head>
+	<body>
+		<div class="nav">
+			<a class='link' id='home_button' th:href="@{home}">Home</a>
+			<div sec:authorize="isAuthenticated()">
+				<form th:action="@{/logout}" method="post" class="logout">
+	          		<input type="image" th:src="@{images/logout.png}" alt="submit" class="logout_button"/>
+	       		</form>
+				<p class = "username_message"> Você está logado como [[${#httpServletRequest.remoteUser}]]!</p> 
+	   		</div>
+   		</div>
+	    
+		<div class = "loginbox">
+			<img th:src="@{images/logo1.png}" class = "avatar">
+				<h1> Faça seu cadastro! </h1>
+				<div th:if="${param.username_error}" class = "forms_error">
+					Username já registrado.
+				</div>
+				<div th:if="${param.invalid}" class = "forms_error">
+					Dados inválidos.
+				</div>
+				<form th:action="@{/forms}" method="post">
+	            	
+	            	<h2> Usuário </h2>
+	            	<div><label><input type="text" name="username" placeholder="Escolha seu usuário"/> </label></div>
+	            	<h2> Senha </h2>
+	            	<div><label><input type="password" name="password" placeholder="Escolha sua senha"/> </label></div>
+	            	<div><input type="submit" value="Cadastrar-se"/></div>
+	    		</form>
 		
-	</div>
-
-
-
-
-
-<!-- 	<h1>Faça seu cadastro!</h1>
-	<form th:action="@{/forms}" method="post">
-            <div><label> Username : <input type="text" name="username"/> </label></div>
-            <div><label> Senha: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Cadastrar-se"/></div>
-    </form> -->
-</body>
+				<a th:href="@{login}"> Já possui conta? </a>
+		</div>
+		
+		<div class="footer">
+	  		<h3>@2020 CRUSHERS OF PROJETO FINAL - Noticeiro</h3>
+		</div>
+	</body>
 </html>
