@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 :root{
-	//--cor1: #0D0221;
 	--cor1: #100006;
 	--cor2: #e6e8e6;
 	--cor3: #f06543;
@@ -38,11 +37,11 @@ body {
   font-size: var(--tamanho1);
 }
 
-.logo{
+.logo {
 	width:12vw;
 }
 
-#feed{
+#feed_button {
   position: static;
   padding: 0.4vw;
   text-align: center;

@@ -1,5 +1,6 @@
 package noticeiro.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import noticeiro.LeitorXML;
 import noticeiro.model.Link;
+import noticeiro.model.Publicacao;
 import noticeiro.model.Usuario;
 import noticeiro.service.UsuarioService;
 
@@ -31,6 +34,7 @@ public class UsuarioController {
 	UsuarioService usuarioService;
 	
 	// POST methods
+	
 	@RequestMapping(method = RequestMethod.POST, path="/forms")
 	public RedirectView insertUsuarioPeloForms(@Valid @NotNull Usuario usuario, BindingResult result) {
 		if(result.hasErrors()) {
@@ -74,20 +78,35 @@ public class UsuarioController {
 	}
 	
 	// GET methods
-	@ModelAttribute("links")
-    @RequestMapping(method = RequestMethod.GET, path = "/feed")
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/feed")
+    @ModelAttribute("links")
     public List<Link> getListaDeLinks() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
         return usuarioService.getUsuarioByUsername(username).getLinks();
     }
-	
+
+	//@RequestMapping(method = RequestMethod.GET, path = "/feed")
+	@ModelAttribute("publicacoes")
+	public List<Publicacao> getPublicacoes() {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = userDetails.getUsername();
+		List<Link> listaLinks = usuarioService.getUsuarioByUsername(username).getLinks();
+		List<Publicacao> listaPub = new ArrayList<>();
+		for(Link link:listaLinks) {
+			for(Publicacao pub:LeitorXML.lerRSS(link.getUrl())) {
+				listaPub.add(pub);
+			}
+		}
+		return listaPub;
+	}
+ 
 	// DELETE methods
+	
 	@RequestMapping(method = RequestMethod.DELETE, path = "/api/usuario/{id}")
 	public void deleteUsuarioById(@PathVariable("id") String id) {
 		usuarioService.deleteUsuarioById(id);
-	}
-	
-	
+	}	
 	
 }

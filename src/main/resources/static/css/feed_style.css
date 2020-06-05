@@ -6,35 +6,26 @@
 	--cor5: #f09d51;
 }
 
-.nav{
+*{
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	font-family: sans-serif;
+}
+
+.header {
 	margin:0;
-	background: var(--cor1);
  	position: fixed;
+ 	background: var(--cor1);
  	top: 0;
  	right:0;
  	width:100%;
  	height: 3vw;
-}
-
-.nav a{
-	position: relative;
-	top: 0.5vw;
-	background: var(--cor3);	
-	float:right;
-	max-height: 2vw;
-	padding:0.4vw;
-	/*border-left-style: solid; 
-	border-width: thin;*/
-	color: var(--cor1);
-	border-radius: 4vw;
-	font-size: var(--tamanho2);
-	text-decoration: none;
-	text-align: center;
-	
-}
-
-.nav a:hover {
-	color: var(--cor2);
+ 	display: flex;
+	flex-flow: row wrap;
+	align-content: center;
+	padding-right: 10px;
+	justify-content: flex-end;
 }
 
 body {
@@ -100,12 +91,46 @@ body {
 	background: #bdbdbd;
 }
 
+
+.delete {
+	display: none;
+	transition: 0.4s;
+}
+
+
 .tabela_links tr:hover .delete{
 	display:block;
 	float: right;
 }
 
-/* FORMS */
+.delete_button {
+	height: 1vw;
+	width: 1vw;
+}
+
+.add_button {
+	height: 1.5vw;
+	width: 1.5vw;
+	filter: invert(94%) sepia(94%) saturate(0%) hue-rotate(242deg) brightness(105%) contrast(109%);
+	transition: 0.3s;
+}
+
+.add_button:hover {
+	filter: invert(73%) sepia(78%) saturate(662%) hue-rotate(321deg) brightness(98%) contrast(92%);
+}
+
+
+.add {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	padding: 10px;
+	align-items: center;
+}
+
+.url_error {
+	color: white;
+}
 
 .insert_link input[type="text"]{
 	border: none;
@@ -117,38 +142,14 @@ body {
 	color: white;
 }
 
-/* BUTTONS/LINKS */
-
-.delete {
-	display: none;
-	transition: 0.4s;
-}
-.delete_button {
-	height: 1vw;
-	width: 1vw;
+.logout_button {
+	height: 2vw;
+	width: 2vw;
+	filter: invert(100%) sepia(0%) saturate(7458%) hue-rotate(178deg) brightness(106%) contrast(101%);
 }
 
-.add {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
-	padding: 10px;
-	align-items: center;
-}
-.add_button {
-	height: 1.5vw;
-	width: 1.5vw;
-	filter: invert(94%) sepia(94%) saturate(0%) hue-rotate(242deg) brightness(105%) contrast(109%);
-	transition: 0.3s;
-}
-.add_button:hover {
-	filter: invert(73%) sepia(78%) saturate(662%) hue-rotate(321deg) brightness(98%) contrast(92%);
-}
-
-/* MESSAGES */
-
-.url_error {
-	color: white;
+.logout_button:hover {
+	filter: invert(72%) sepia(73%) saturate(979%) hue-rotate(324deg) brightness(102%) contrast(88%);
 }
 
 

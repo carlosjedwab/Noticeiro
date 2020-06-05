@@ -63,8 +63,6 @@ h1 {
 	font-weight: bold;
 }
 
-/* FORMS */
-
 .loginbox input {
 	width: 100%;
 	margin-bottom: 2vw;
@@ -100,8 +98,6 @@ h1 {
 	color: #000;
 }
 
-/* BUTTONS/LINKS */
-
 .loginbox a {
 	text-decoration: none;
 	font-size: 1.2vw;
@@ -113,10 +109,13 @@ h1 {
 	color: var(--cor3);;
 }
 
-/* MESSAGES */
-
-.forms_error {
+.error {
 	color: red;
+	font-size: var(--fontPeq);
+}
+
+.logout {
+	color: green;
 	font-size: var(--fontPeq);
 }
 
