@@ -78,28 +78,25 @@ public class UsuarioController {
 	}
 	
 	// GET methods
-	
 	@RequestMapping(method = RequestMethod.GET, path = "/feed")
-    @ModelAttribute("links")
-    public List<Link> getListaDeLinks() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = userDetails.getUsername();
-        return usuarioService.getUsuarioByUsername(username).getLinks();
-    }
+	public ModelAndView getFeed() {
+		ModelAndView mv = new ModelAndView("feed");
 
-	//@RequestMapping(method = RequestMethod.GET, path = "/feed")
-	@ModelAttribute("publicacoes")
-	public List<Publicacao> getPublicacoes() {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = userDetails.getUsername();
-		List<Link> listaLinks = usuarioService.getUsuarioByUsername(username).getLinks();
-		List<Publicacao> listaPub = new ArrayList<>();
+        String username = userDetails.getUsername();
+    
+        List<Link> listaLinks = usuarioService.getUsuarioByUsername(username).getLinks();
+        
+        List<Publicacao> listaPub = new ArrayList<>();
 		for(Link link:listaLinks) {
 			for(Publicacao pub:LeitorXML.lerRSS(link.getUrl())) {
 				listaPub.add(pub);
 			}
 		}
-		return listaPub;
+		
+		mv.addObject("links", listaLinks);
+		mv.addObject("publicacoes", listaPub);
+		return mv;
 	}
  
 	// DELETE methods
