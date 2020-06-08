@@ -5,12 +5,49 @@
 	--button_alt1_color: #f06543;
 	--button_alt2_color: #f09d51;
 	
+	--text_h1_size: 2.1vw;
+	--text_h2_size: 1.5vw;
+	--footer_size: 0.5vw;
 	--message_size: 1.25vw;
 	--nav_button_text_size: 1.2vw;
 	--navbar_height: 3vw;
 }
 
-.nav{
+
+/* BASIC STYLE */
+
+body {
+  font-family: Arial;
+  padding: 0;
+  background: var(--background_color);
+}
+
+h1 {
+	margin: 0;
+	padding: 0 0 2vw;
+	text-align: center;
+	font-size:  --text_h1_size;
+}
+
+h2 {
+	font-size: --text_h2_size;
+}
+
+.footer {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width:100%;
+  color: var(--footer_color);
+  font-size: var(--footer_size);
+}
+
+
+/* NAVBAR */
+
+
+.nav {
 	margin:0;
 	background: var(--navbar_color);
  	position: fixed;
@@ -20,11 +57,11 @@
  	height: 3vw;
 }
 
-.nav a{
+.nav a {
 	position: relative;
 	top: 0.5vw;
 	background: var(--button_alt1_color);	
-	float:right;
+	float: right;
 	max-height: 2vw;
 	padding:0.4vw;
 	/*border-left-style: solid; 
@@ -34,7 +71,6 @@
 	font-size: var(--nav_button_text_size);
 	text-decoration: none;
 	text-align: center;
-	
 }
 
 .nav a:hover {
@@ -42,7 +78,7 @@
 }
 
 .logout_button {
-	float: left;
+	float: right;
 	margin-top: calc(var(--navbar_height) / 5);
 	margin-left: 0.5vw;
 	height: 2vw;
@@ -63,10 +99,12 @@
 }
 
 #home_button {
+	float: left;
 	background: var(--button_alt1_color);
 }
 
 .username_message {
+	position: relative;
 	float: left;
 	color: green;
 	font-family: Arial;
@@ -74,8 +112,15 @@
 }
 
 .logout_message {
+	position: relative;
 	float: left;
 	color: green;
+	font-family: Arial;
+	font-size: var(--message_size);
+}
+
+.error_message {
+	color: red;
 	font-family: Arial;
 	font-size: var(--message_size);
 }

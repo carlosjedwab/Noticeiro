@@ -4,38 +4,32 @@
     <head>
         <title>Noticeiro - Feed</title>
         <link rel="stylesheet" type="text/css" th:href="@{/css/feed_style.css}" href="../static/css/feed_style.css">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" href="../static/css/navbar.css" >
+        <link rel="stylesheet" type="text/css" th:href="@{/css/noticeiro_style.css}" href="../static/css/noticeiro_style.css" >
+        <link rel = "icon" type = "image/png" th:href = "@{/images/N.png}">
     </head>
     <body>
 		<div class="nav">
+			<a class='link' id='home_button' th:href="@{home}">Home</a>
      	   	<form th:action="@{/logout}" method="post">
            		<input type="image" th:src="@{images/logout.png}" alt="submit" class="logout_button"/>
         	</form>
-	        <p class = "username_message"> Bem-vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</p> 
-	        <a class='link' id='home_button' th:href="@{home}">Home</a>
+	        <p class = "username_message"> Bem-vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</p>
 	    </div>
 	     
-	      
-	      <div class = "feed_tool">
-	      
-	      
-	      	<div class = "new_link">
-		       <form th:action="@{/feed/links/add}" method="post" class = "add">
-			 	  <div class="insert_link"><label><input type="text" name="url" placeholder="Novo link"/> </label></div>
-			 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
-			 	  <div th:if="${param.url_error}" class = "url_error">URL já existente.</div>
-			  	  <div th:if="${param.invalid}" class = "url_error">URL inválida.</div> 
-		       </form>
-		  	</div>
+		<div class = "feed_body">
+	          
+	       <form th:action="@{/feed/links/add}" method="post" class = "add_link_form">
+		 	  <label class="insert_link"><input type="text" name="url" placeholder="Novo link"/> </label>
+		 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
+		 	  <p th:if="${param.url_error}" class = "url_error">URL já existente.</p>
+		  	  <p th:if="${param.invalid}" class = "url_error">URL inválida.</p> 
+	       </form>
 	        
 	        <div class ="filter">
 	        
-		        <table class = "tabela_links">
+				<table class = "links_table">
 		            <thead>
-		                <tr>
-		                    <th> Lista de URLs
-		                    </th>
-		                </tr>
+		                <tr><th> Lista de URLs</th></tr>
 		            </thead>
 		            <tbody>
 		                <tr th:if="${links.empty}">
@@ -50,30 +44,24 @@
 		                	</td>	
 		                </tr>     
 		            </tbody>
-		        </table>
-	
-				<table class = "tabela_links">
+				</table>
+				
+				<table class = "pubs_table" th:if="${!publicacoes.empty}">
 		   			<thead>
-		   				<tr>
-		   				<th>Publicação</th>
-		   				<th>Fonte</th>
-		   				</tr>
+		   				<tr><th>Publicação</th><th>Fonte</th></tr>
 		   			</thead>
-		   			<tr th:each="publicacao: ${publicacoes}">
-		   				<td>
-		   					<a th:href="${publicacao.link}" target="_blank" rel="noopener noreferrer"><span th:text="${publicacao.title}">Title</span></a>
-		   				</td>
-		   				
-		   				<td>
-		 					<span th:text="${publicacao.source}"></span>  					
-		   				</td>
-		   			</tr>
-	   			</table>
+		   			<tbody>
+			   			<tr th:each="publicacao: ${publicacoes}">
+			   				<td><a th:href="${publicacao.link}" target="_blank" rel="noopener noreferrer"><span th:text="${publicacao.title}">Title</span></a></td>
+			   				<td><span th:text="${publicacao.source}"></span></td>
+			   			</tr>
+		   			</tbody>
+				</table>
    			
 	   		</div>
 	   		
-	   		
+	  		<h3 class="footer">@2020 CRUSHERS OF PROJETO FINAL - Noticeiro</h3>
 	  	 </div>
-   
+	  	 
     </body>
 </html>

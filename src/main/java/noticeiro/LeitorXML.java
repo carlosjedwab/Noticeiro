@@ -45,4 +45,17 @@ public class LeitorXML {
 		
 		return publicacoes;
 	}
+	
+	static public boolean checarValidadeDoRSS(String url) {
+        try {
+            URL feedSource = new URL(url);
+            SyndFeedInput input = new SyndFeedInput();
+            @SuppressWarnings("unused")
+			SyndFeed feed = input.build(new XmlReader(feedSource));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+
+    }
 }

@@ -4,7 +4,8 @@
 	<head>
 		<title>Noticeiro - Cadastro</title>
 		<link rel="stylesheet" type="text/css" th:href="@{/css/form_style.css}" href="../static/css/form_style.css">
-		<link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" href="../static/css/navbar.css" >
+		<link rel="stylesheet" type="text/css" th:href="@{/css/noticeiro_style.css}" href="../static/css/noticeiro_style.css" >
+		<link rel = "icon" type = "image/png" th:href = "@{/images/N.png}">
 	</head>
 	<body>
 		<div class="nav">
@@ -19,27 +20,20 @@
 	    
 		<div class = "loginbox">
 			<img th:src="@{images/logo1.png}" class = "avatar">
-				<h1> Faça seu cadastro! </h1>
-				<div th:if="${param.username_error}" class = "forms_error">
-					Username já registrado.
-				</div>
-				<div th:if="${param.invalid}" class = "forms_error">
-					Dados inválidos.
-				</div>
-				<form th:action="@{/forms}" method="post">
-	            	
-	            	<h2> Usuário </h2>
-	            	<div><label><input type="text" name="username" placeholder="Escolha seu usuário"/> </label></div>
-	            	<h2> Senha </h2>
-	            	<div><label><input type="password" name="password" placeholder="Escolha sua senha"/> </label></div>
-	            	<div><input type="submit" value="Cadastrar-se"/></div>
-	    		</form>
-		
-				<a th:href="@{login}"> Já possui conta? </a>
+			<h1> Faça seu cadastro! </h1>
+			<div th:if="${param.username_error}" class = "error_message">Username já registrado.</div>
+			<div th:if="${param.invalid}" class = "error_message">Dados inválidos.</div>
+			<form th:action="@{/signup/try}" method="post">
+            	<h2> Usuário </h2>
+            	<div><label><input type="text" name="username" placeholder="Escolha seu usuário"/> </label></div>
+            	<h2> Senha </h2>
+            	<div><label><input type="password" name="password" placeholder="Escolha sua senha"/> </label></div>
+            	<div><input type="submit" value="Cadastrar-se"/></div>
+    		</form>
+    		
+			<a th:href="@{login}"> Já possui conta? </a>
 		</div>
 		
-		<div class="footer">
-	  		<h3>@2020 CRUSHERS OF PROJETO FINAL - Noticeiro</h3>
-		</div>
+		<h3 class="footer">@2020 CRUSHERS OF PROJETO FINAL - Noticeiro</h3>
 	</body>
 </html>
