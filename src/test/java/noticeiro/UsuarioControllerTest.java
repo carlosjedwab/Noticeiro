@@ -1,6 +1,10 @@
 package noticeiro;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -51,7 +56,7 @@ class UsuarioControllerTest {
 		repository.deleteAll();
 		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		mvc.perform(MockMvcRequestBuilders
-			.post("/forms")
+			.post("/signup/try")
 			.param("username", username_do_user)
 			.param("password", password_do_user));
 	}
@@ -69,6 +74,24 @@ class UsuarioControllerTest {
 			.param("url", url_do_site1));
 		
 		assertTrue(usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
+	}
+	
+	@Test
+	@WithMockUser(username_do_user)
+	void testGetLinks() throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+			.post("/feed/links/add")
+			.param("url", url_do_site1));
+		MvcResult result = mvc.perform(MockMvcRequestBuilders
+			.get("links"))
+		.andReturn();
+		//.andExpect(status().isOk())
+		//.andExpect(content().string(containsString(url_do_site1)));
+		
+		String content = result.getResponse().getContentAsString();
+		// arrumar (Carlos)
+		
+		//assertTrue(usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
 	}
 	
 	@Test

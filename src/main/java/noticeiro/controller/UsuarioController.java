@@ -12,11 +12,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import noticeiro.LeitorXML;
@@ -35,7 +35,7 @@ public class UsuarioController {
 	
 	// POST methods
 	
-	@RequestMapping(method = RequestMethod.POST, path="/forms")
+	@RequestMapping(method = RequestMethod.POST, path="/signup/try")
 	public RedirectView insertUsuarioPeloForms(@Valid @NotNull Usuario usuario, BindingResult result) {
 		if(result.hasErrors()) {
 			return new RedirectView("signup?invalid", true);
@@ -54,7 +54,7 @@ public class UsuarioController {
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/feed/links/add")
     public RedirectView insertLink(@Valid @NotNull Link link, BindingResult result) {
-		if(result.hasErrors()) {
+		if(result.hasErrors() || !LeitorXML.checarValidadeDoRSS(link.getUrl())) {
 			return new RedirectView("/feed?invalid", true);
 		}
 		

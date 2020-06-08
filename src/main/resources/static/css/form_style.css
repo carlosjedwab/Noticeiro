@@ -1,4 +1,4 @@
-:root{
+:root {
 	--cor1: #100006;
 	--cor2: #e6e8e6;
 	--cor3: #f06543;
@@ -6,55 +6,19 @@
 	--cor5: #f09d51;
 	--fontPeq: 1.25vw;
 	--tamanho3: 0.5vw;
-}
-
-
-body {
-	margin: 0;
-	padding: 0;
-	background: var(--cor4);
-	background-size: cover;
-	background-position: center;
-	font-family: sans-serif;
-}
-
-
-h2{
-	font-size: 1.5vw;
-}
-
-.label{
-	font-size:  1.5vw;
-}
-
-.loginbox{
-	width: 27vw;
-	min-height: 36vw;
-	background: var(--cor2);
-	color: var(--cor4);
-	top: 50%;
-	left: 50%;
-	position: absolute;
-	transform: translate(-50%,-50%);
-	box-sizing: border-box;
-	padding: 6.8vw 2.9vw 1vw;
-	border-radius: 2.9vw;
-}
-
-.avatar {
-	width: 9vw;
-	height: 9vw;
-	position: absolute;
-	top: -4.9vw;
-	left: calc(50% - 4.9vw);
 	
+	--background_color: #313638;
+	--footer_color: #e6e8e6;
 }
 
-h1 {
-	margin: 0;
-	padding: 0 0 2vw;
-	text-align: center;
-	font-size:  2.1vw;
+.loginbox a {
+	text-decoration: none;
+	font-size: 1.2vw;
+	line-height: 2vw;
+	color: var(--cor4);
+}
+.loginbox a:hover {
+	color: var(--cor3);;
 }
 
 .loginbox p {
@@ -88,7 +52,7 @@ h1 {
 	transition: 0.4s
 }
 
-.loginbox input[placeholder]{
+.loginbox input[placeholder] {
 	font-size: 1.7vw;
 }
 
@@ -98,25 +62,26 @@ h1 {
 	color: #000;
 }
 
-.loginbox a {
-	text-decoration: none;
-	font-size: 1.2vw;
-	line-height: 2vw;
+.loginbox {
+	width: 27vw;
+	min-height: 36vw;
+	background: var(--cor2);
 	color: var(--cor4);
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 6.8vw 2.9vw 1vw;
+	border-radius: 2.9vw;
 }
 
-.loginbox a:hover {
-	color: var(--cor3);;
-}
-
-.error {
-	color: red;
-	font-size: var(--fontPeq);
-}
-
-.logout {
-	color: green;
-	font-size: var(--fontPeq);
+.avatar {
+	width: 9vw;
+	height: 9vw;
+	position: absolute;
+	top: -4.9vw;
+	left: calc(50% - 4.9vw);	
 }
 
 .footer {
