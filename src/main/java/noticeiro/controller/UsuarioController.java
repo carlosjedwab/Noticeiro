@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,20 +37,20 @@ public class UsuarioController {
 	// POST methods
 	
 	@RequestMapping(method = RequestMethod.POST, path="/signup/try")
-	public RedirectView insertUsuarioPeloForms(@Valid @NotNull Usuario usuario, BindingResult result) {
+	public RedirectView insertUsuarioPeloForms(@Valid @NotBlank Usuario usuario, BindingResult result) {
 		if(result.hasErrors()) {
-			return new RedirectView("signup?invalid", true);
+			return new RedirectView("/signup?invalid", true);
 		}
 		
 		String username = usuario.getUsername();
 		
 		if(usuarioService.usernameJaRegistrado(username)) {
-			return new RedirectView("signup?username_error", true);
+			return new RedirectView("/signup?username_error", true);
 		}
 		
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		usuarioService.insertUsuario(usuario);
-		return new RedirectView("login", true);
+		return new RedirectView("/login", true);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/feed/links/add")

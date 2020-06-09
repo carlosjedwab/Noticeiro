@@ -36,7 +36,8 @@ public class LeitorXML {
 				Publicacao publicacao = new Publicacao();
 				publicacao.setTitle(entry.getTitle());
 				publicacao.setLink(entry.getLink());
-				publicacao.setSource(feed.getTitle());
+				publicacao.setFeedTitle(feed.getTitle());
+				publicacao.setSource(url);
 				publicacoes.add(publicacao);
 			}
 		} catch (IllegalArgumentException | FeedException | IOException e) {

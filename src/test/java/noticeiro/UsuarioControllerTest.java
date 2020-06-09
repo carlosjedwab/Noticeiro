@@ -1,10 +1,11 @@
 package noticeiro;
 
-import static org.hamcrest.CoreMatchers.containsString;
+import org.hamcrest.Matchers;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,8 +45,8 @@ class UsuarioControllerTest {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 	
-	final String url_do_site1 = "some_url";
-	final String url_do_site2 = "some_other_url";
+	final String url_do_site1 = "https://g1.globo.com/rss/g1/";
+	final String url_do_site2 = "https://www.wired.com/feed/category/business/latest/rss";
 	final String username_do_user = "some_user";
 	final String username_do_admin = "some_admin";
 	final String password_do_user = "some_password";
@@ -76,6 +77,7 @@ class UsuarioControllerTest {
 		assertTrue(usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	@WithMockUser(username_do_user)
 	void testGetLinks() throws Exception {
@@ -83,15 +85,27 @@ class UsuarioControllerTest {
 			.post("/feed/links/add")
 			.param("url", url_do_site1));
 		MvcResult result = mvc.perform(MockMvcRequestBuilders
-			.get("links"))
-		.andReturn();
-		//.andExpect(status().isOk())
-		//.andExpect(content().string(containsString(url_do_site1)));
-		
-		String content = result.getResponse().getContentAsString();
-		// arrumar (Carlos)
-		
-		//assertTrue(usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
+			.get("/feed"))
+				.andReturn();
+		Link content = ((List<Link>) result.getModelAndView().getModel().get("links")).get(0);
+		System.out.println("---------------------------------------------------");
+		System.out.println(content.getUrl());
+		System.out.println("---------------------------------------------------");
+		assertTrue(content.getUrl().equals(url_do_site1));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	@WithMockUser(username_do_user)
+	void testGetPublicacoes() throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+			.post("/feed/links/add")
+			.param("url", url_do_site1));
+		MvcResult result = mvc.perform(MockMvcRequestBuilders
+			.get("/feed"))
+				.andReturn();
+		List<Link> content = ((List<Link>) result.getModelAndView().getModel().get("publicacoes"));
+		assertTrue(!content.isEmpty());
 	}
 	
 	@Test

@@ -4,7 +4,14 @@ public class Publicacao {
 	String title;
 	String link;
 	String source;
+	String feedTitle;
 	
+	public String getFeedTitle() {
+		return feedTitle;
+	}
+	public void setFeedTitle(String feedTitle) {
+		this.feedTitle = feedTitle;
+	}
 	public String getSource() {
 		return source;
 	}

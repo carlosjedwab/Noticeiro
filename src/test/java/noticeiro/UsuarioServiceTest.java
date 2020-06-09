@@ -24,8 +24,8 @@ class UsuarioServiceTest {
 	@Autowired
 	UsuarioRepository repository;
 	
-	final String url_do_site1 = "some_url";
-	final String url_do_site2 = "some_other_url";
+	final String url_do_site1 = "https://g1.globo.com/rss/g1/";
+	final String url_do_site2 = "https://www.wired.com/feed/category/business/latest/rss";
 	final String username_do_user = "some_user";
 	final String password_do_user = "some_password";
 	
