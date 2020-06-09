@@ -52,6 +52,21 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>          
+    		<groupId>rome</groupId>         
+    		<artifactId>rome</artifactId>           
+    		<version>1.0</version>
+		</dependency>
+		<dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+            <version>3.0.2.RELEASE</version>
+        </dependency>
+        <dependency>
+		    <groupId>com.rometools</groupId>
+		    <artifactId>rome</artifactId>
+		    <version>1.10.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

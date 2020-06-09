@@ -1,21 +1,29 @@
 package noticeiro;
 
+import org.hamcrest.Matchers;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import noticeiro.dao.UsuarioRepository;
+import noticeiro.model.Link;
 import noticeiro.service.AuthenticationService;
 import noticeiro.service.UsuarioService;
 
@@ -26,7 +34,7 @@ class UsuarioControllerTest {
 	@Autowired
 	UsuarioService usuarioService;
 	
-	@Autowired
+	@Mock
 	UsuarioRepository repository;
 	
 	@Autowired
@@ -38,8 +46,8 @@ class UsuarioControllerTest {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 	
-	final String url_do_site1 = "some_url";
-	final String url_do_site2 = "some_other_url";
+	final String url_do_site1 = "https://g1.globo.com/rss/g1/";
+	final String url_do_site2 = "https://www.wired.com/feed/category/business/latest/rss";
 	final String username_do_user = "some_user";
 	final String username_do_admin = "some_admin";
 	final String password_do_user = "some_password";
@@ -50,7 +58,7 @@ class UsuarioControllerTest {
 		repository.deleteAll();
 		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		mvc.perform(MockMvcRequestBuilders
-			.post("/forms")
+			.post("/signup/try")
 			.param("username", username_do_user)
 			.param("password", password_do_user));
 	}
@@ -64,20 +72,51 @@ class UsuarioControllerTest {
 	@WithMockUser(username_do_user)
 	void testNewLink() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-			.post("/feed/newLink")
+			.post("/feed/links/add")
 			.param("url", url_do_site1));
 		
 		assertTrue(usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	@WithMockUser(username_do_user)
+	void testGetLinks() throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+			.post("/feed/links/add")
+			.param("url", url_do_site1));
+		MvcResult result = mvc.perform(MockMvcRequestBuilders
+			.get("/feed"))
+				.andReturn();
+		Link content = ((List<Link>) result.getModelAndView().getModel().get("links")).get(0);
+		System.out.println("---------------------------------------------------");
+		System.out.println(content.getUrl());
+		System.out.println("---------------------------------------------------");
+		assertTrue(content.getUrl().equals(url_do_site1));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	@WithMockUser(username_do_user)
+	void testGetPublicacoes() throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+			.post("/feed/links/add")
+			.param("url", url_do_site1));
+		MvcResult result = mvc.perform(MockMvcRequestBuilders
+			.get("/feed"))
+				.andReturn();
+		List<Link> content = ((List<Link>) result.getModelAndView().getModel().get("publicacoes"));
+		assertTrue(!content.isEmpty());
 	}
 	
 	@Test
 	@WithMockUser(username_do_user)
 	void testDeleteLink() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-			.post("/feed/newLink")
+			.post("/feed/links/add")
 			.param("url", url_do_site1));
 		mvc.perform(MockMvcRequestBuilders
-			.post("/feed/deleteLink")
+			.post("/feed/links/delete")
 			.param("url", url_do_site1));
 		
 		assertTrue(!usuarioService.urlJaRegistrado(url_do_site1, username_do_user));

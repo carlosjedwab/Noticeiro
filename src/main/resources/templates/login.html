@@ -2,31 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
-        <title>Noticeiro - Login </title>
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css">
+        <title>Noticeiro - Login</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/form_style.css}" href="../static/css/form_style.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/noticeiro_style.css}" href="../static/css/noticeiro_style.css" >
+        <link rel = "icon" type = "image/png" th:href = "@{/images/N.png}">
  	</head>
     <body>
+    	<div class="nav">
+			<a class='link' id='home_button' th:href="@{home}">Home</a>
+			<div sec:authorize="isAuthenticated()">
+				<form th:action="@{/logout}" method="post" class="logout">
+	          		<input type="image" th:src="@{images/logout.png}" alt="submit" class="logout_button"/>
+	       		</form>
+				<p class = "username_message"> Você está logado como [[${#httpServletRequest.remoteUser}]]!</p> 
+	   		</div>
+	    </div>
+	    
 		<div class = "loginbox">
 			<img th:src="@{images/logo1.png}" class = "avatar">
 			<h1> Faça seu login </h1>
-      		<div th:if="${param.error}" class = "error">
-           		<p> Dados inválidos. Tente novamente. </p>
-       		</div>
-       		<div th:if="${param.logout}" class = "logout">
-           		<p> Você desconectou-se com sucesso. </p> 
-      		</div>
+      		<div th:if="${param.error}" class = "error_message">Dados inválidos. Tente novamente.</div>
+      		
         	<form th:action="@{/login}" method="post">
         		<h2> Usuário </h2>
-           		<div><label> <input type="text" name="username" placeholder = "Entre seu usuário"/> </label></div>
+           		<div><label><input type="text" name="username" placeholder = "Entre seu usuário"/> </label></div>
             	<h2> Senha </h2>
-            	<div><label> <input type="password" name="password" placeholder = "Entre sua senha"/> </label></div>
+            	<div><label><input type="password" name="password" placeholder = "Entre sua senha"/> </label></div>
             	<div><input type="submit" value="Entrar"/></div>
        		</form>
+       		
         	<a th:href="@{signup}"> Não possui conta? </a>
 		</div>
 		
-		<div class="footer">
-  			<h3>@2020 Noticeiro - CRUSHERS OF PROJETO FINAL</h3>
-		</div>
+		<h3 class="footer">@2020 CRUSHERS OF PROJETO FINAL - Noticeiro</h3>	
     </body>
 </html>
