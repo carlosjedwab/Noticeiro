@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import noticeiro.dao.UsuarioRepository;
+import noticeiro.model.Link;
 import noticeiro.service.AuthenticationService;
 import noticeiro.service.UsuarioService;
 
