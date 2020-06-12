@@ -3,56 +3,121 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Noticeiro - Feed</title>
-    </head>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/feed_style.css}" href="../static/css/feed_style.css">
-    <body>
-        <h1 th:inline="text">Bem vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</h1>
-     
-     <div class="header">
-     	   <form th:action="@{/logout}" method="post" class="logout">
-            <input type="image" th:src="@{images/logout.png}" alt="submit" class="logout_button"/>
-        	</form>
-     </div>
-     
-      
-      <div class = "feed_tool">
-       <div class = "new_link">
-       <form th:action="@{/feed/newLink}" method="post" class = "add">
-	 	  <div class="insert_link"><label><input type="text" name="url" placeholder="Novo link"/> </label></div>
-	 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
-	 	  <div th:if="${param.url_error}" class = "url_error">
-			URL já existente.
-	  	  </div>
-	  	  <div th:if="${param.invalid}" class = "url_error">
-			URL inválida.
-	  	  </div> 
-       </form>
-       </div>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/feed_style.css}" href="../static/css/feed_style.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/noticeiro_style.css}" href="../static/css/noticeiro_style.css" >
+        <link rel = "icon" type = "image/png" th:href = "@{/images/N.png}">
         
-        <div class ="filter">
-        <table class = "tabela_links">
-            <thead>
-                <tr>
-                    <th> Lista de URLs
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:if="${links.empty}">
-                    <td> Não há links cadastrados </td>
-                </tr>
-                <tr th:each="link : ${links}">
-                    <td><span th:text="${link.url}"> URL </span>
-                    <form th:action="@{/feed/deleteLink}" th:method="post" class = "delete">
-                    	<input type="hidden" name="url" th:value=${link.url} />
-                    	<input type="image" th:src="@{images/lixo.png}" alt="submit" class="delete_button"/>
-                  	</form> 
-                	</td>	
-                </tr>     
-            </tbody>
-        </table>
-   		</div>
-  	 </div>
-   
+        <meta charset="utf-8"/>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	    <meta name="description" content=""/>
+	    <meta name="viewport" content="width=device-width"/>
+	    <base href="/"/>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrapCss/bootstrap.min.css}" href="../static/css/bootstrapCss/bootstrap.min.css"/>
+	    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	    <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css"></link>
+    </head>
+       
+    <body>
+    
+    
+     	<div class="navbar navbar-dark bg-dark">
+			<!--  <a class='link navbar-brand' id='home_button' th:href="@{home}">Home</a> -->
+			<a class="navbar-brand" th:href="@{home}" >
+    		<img src="../images/logo1.png"  th:href = "@{/images/logo1.png}" width="30" height="30" class="d-inline-block align-top" alt="">
+   				 Noticeiro
+  			</a>
+			
+     	   	<ul class="navbar-nav">
+     	   	<li class="nav-item"> <form th:action="@{/logout}" method="post">
+           		<input type="image" th:src="@{images/logout.png}" alt="submit" class="logout_button"/>
+        	</form>
+        	</li>
+        	</ul>
+	    </div>
+    
+    	
+    <div class="container">	
+    
+		<div class = "row justify-content-between align-items-center">
+		
+		<div class = "col">   
+		<p class = "username_message"> Bem-vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</p>
+		</div>
+		</div>
+		
+		<div class="row mb-3">
+		
+	    	<div class = "col justify-content-center">   
+	       <form th:action="@{/feed/links/add}" method="post" class = "add_link_form">
+		 	  <label class="insert_link"><input type="text" name="url" placeholder="Novo link"/> </label>
+		 	  <p th:if="${param.url_error}" class = "url_error">URL já existente.</p>
+		  	  <p th:if="${param.invalid}" class = "url_error">URL inválida.</p> 
+		 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
+	       </form>
+	     </div>
+	     </div>
+	     
+	     <div class = "row mb-3">
+	     <div class = "col justify-content-center">
+	       <table class = "links_table">
+		            <thead>
+		                <tr><th> Lista de URLs</th></tr>
+		            </thead>
+		            <tbody>
+		                <tr th:if="${links.empty}">
+		                    <td> Não há links cadastrados </td>
+		                </tr>
+		                <tr th:each="link : ${links}">
+		                    <td><span th:text="${link.url}"> URL </span>
+		                    <form th:action="@{/feed/links/delete}" th:method="post" class = "delete">
+		                    	<input type="hidden" name="url" th:value=${link.url} />
+		                    	<input type="image" th:src="@{images/lixo.png}" alt="submit" class="delete_button"/>
+		                  	</form> 
+		                	</td>	
+		                </tr>     
+		            </tbody>
+				</table>
+			</div>
+	   		</div>   		
+	  	   
+    	<!--  <div class="row">
+		 		
+			  	<div class="col-4 justify-content-around my-col" th:each="publicacao: ${publicacoes}">
+					<div>
+						<h4 ><span th:text="${publicacao.title}">Title</span></h4>
+			 			<p>
+			 				Fonte: 
+			 				<span th:text="${publicacao.feedTitle}"> </span>
+			 				<span th:text="${publicacao.source}"></span>
+			 			</p>
+			 			<a class="stretched-link" th:href="${publicacao.link}" target="_blank" rel="noopener noreferrer"> </a>
+					</div>
+					</div>
+				</div> 
+				-->
+				<div class= "row mb-3">
+				<div class ="col justify-content-center">
+				<!-- <div class="card-columns"> -->
+		 		
+			  	<div class="card mb-3" th:each="publicacao: ${publicacoes}">
+					<div class="card-body">
+						<h4 class="class-title"><span th:text="${publicacao.title}">Title</span></h4>
+			 			<p  class="class-text">
+			 				Fonte: 
+			 				<span th:text="${publicacao.feedTitle}"> </span>
+			 				<!--<span th:text="${publicacao.source}"></span>-->
+			 			</p>
+			 			<a class="stretched-link" th:href="${publicacao.link}" target="_blank" rel="noopener noreferrer"> </a>
+					</div>
+					</div>
+				</div> 
+				<!-- </div> -->
+		</div>				
+		</div>
+			
+	  	  
+	
+	  	 
     </body>
 </html>

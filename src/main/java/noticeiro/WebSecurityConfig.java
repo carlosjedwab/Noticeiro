@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/css/**", "/js/**", "/images/**").permitAll()
-				.antMatchers("/", "/home", "/signup", "/forms").permitAll()
+				.antMatchers("/", "/home", "/signup", "/signup/try").permitAll()
 				.antMatchers("/api/**").hasRole("ADMIN")
 				.anyRequest().authenticated()	
 				.and()
@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.logout()
+				.logoutSuccessUrl("/home?logout")
 				.permitAll();
 	}
 	

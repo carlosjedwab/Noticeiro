@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-	<title>Noticeiro</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/home-true.css}" href="../static/css/home-true.css" >
-</head>
-<body>
-	<div class='header'> 
-		<img th:src="@{images/N.png}"  src="../static/images/N.png" class = "logo">
-		<h1>Bem vindo ao Noticeiro!</h1>
-		<p>O Super Agregador de Notícias</p>
-		<a class='link' id='feed' th:href="@{feed}">Acesse o Feed</a>
-	</div>
-	
-	<div class='nav'>
-		<a class='link' id='login' th:href="@{login}">Login</a>
-		<a class='link' id='signup' th:href="@{signup}">Cadastre-se</a>
-	</div>
-	
-	
-	
-	<div class="footer">
-  		<h3>@2020 Noticeiro - CRUSHERS OF PROJETO FINAL</h3>
-	</div>
-
-</body>
+	<head>
+		<title>Noticeiro</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/home_style.css}" href="../static/css/home_style.css" >
+		<link rel="stylesheet" type="text/css" th:href="@{/css/noticeiro_style.css}" href="../static/css/noticeiro_style.css" >
+		<link rel = "icon" type = "image/png" th:href = "@{/images/N.png}">
+	</head>
+	<body>
+		<div class='welcoming'> 
+			<img th:src="@{images/N.png}"  src="../static/images/N.png" class = "logo">
+			<h1>Bem vindo ao Noticeiro!</h1>
+			<p>O Super Agregador de Notícias</p>
+			<a class='link' id='feed_button' th:href="@{feed}">Acesse o Feed</a>
+		</div>	
+		<div sec:authorize="isAuthenticated()">
+			<div class="nav">
+				<a class='link' id='home_button' th:href="@{home}">Home</a>
+				<form th:action="@{/logout}" method="post" class="logout">
+           			<input type="image" th:src="@{images/logout.png}" alt="submit" class="logout_button"/>
+        		</form>
+        		<a class='link' id='login_button' th:href="@{login}">Mudar de usuário</a>
+        		<p class = "username_message"> Você está logado como [[${#httpServletRequest.remoteUser}]]!</p>
+        	</div>
+		</div>
+		<div sec:authorize="isAnonymous()" >
+			<div class="nav">
+				<a class='link' id='home_button' th:href="@{home}">Home</a>
+				<a class='link' id='login_button' th:href="@{login}">Entrar</a>
+				<a class='link'  id='signup_button' th:href="@{signup}">Cadastrar-se</a>
+	           	<p th:if="${param.logout}" class = "logout_message"> Você desconectou-se com sucesso. </p> 
+	      	</div>
+		</div> 
+		<h3 class="footer">@2020 CRUSHERS OF PROJETO FINAL - Noticeiro</h3>
+	</body>
 </html>

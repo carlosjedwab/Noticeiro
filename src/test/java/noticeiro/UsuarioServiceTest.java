@@ -24,45 +24,50 @@ class UsuarioServiceTest {
 	@Autowired
 	UsuarioRepository repository;
 	
+	final String url_do_site1 = "https://g1.globo.com/rss/g1/";
+	final String url_do_site2 = "https://www.wired.com/feed/category/business/latest/rss";
+	final String username_do_user = "some_user";
+	final String password_do_user = "some_password";
+	
 	@BeforeEach
 	void init() {
 		repository.deleteAll();
-		usuarioService.insertUsuario(new Usuario("some_user", "123"));
+		usuarioService.insertUsuario(new Usuario(username_do_user, password_do_user));
 	}
 	
 	@Test
 	void testGetUsuarioByUsername() {
-		assertTrue(usuarioService.getUsuarioByUsername("some_user").getUsername().equals("some_user"));
+		assertTrue(usuarioService.getUsuarioByUsername(username_do_user).getUsername().equals(username_do_user));
 	}
 	
 	@Test
 	void testUsernameJaRegistrado() {
-		assertTrue(usuarioService.usernameJaRegistrado("some_user"));
+		assertTrue(usuarioService.usernameJaRegistrado(username_do_user));
 	}
 	
 	@Test
 	void testDeleteUsuarioById() {
-		usuarioService.deleteUsuarioById(usuarioService.getUsuarioByUsername("some_user").getId());
-		assertTrue(usuarioService.getUsuarioByUsername("some_user") == null);
+		usuarioService.deleteUsuarioById(usuarioService.getUsuarioByUsername(username_do_user).getId());
+		assertTrue(usuarioService.getUsuarioByUsername(username_do_user) == null);
 	}
 	
 	@Test
 	void testInserirLink() {
-		usuarioService.insertLink(new Link("some_link"), "some_user");
-		assertTrue(usuarioService.getUsuarioByUsername("some_user").getLinks().get(0).getUrl().equals("some_link"));
+		usuarioService.insertLink(new Link(url_do_site1), username_do_user);
+		assertTrue(usuarioService.getUsuarioByUsername(username_do_user).getLinks().get(0).getUrl().equals(url_do_site1));
 	}
 	
 	@Test
 	void testDeleteUrlDoUsuario() {
-		usuarioService.insertLink(new Link("some_link"), "some_user");
-		usuarioService.deleteUrlDoUsuario("some_link", "some_user");
-		assertTrue(usuarioService.getUsuarioByUsername("some_user").getLinks().isEmpty());
+		usuarioService.insertLink(new Link(url_do_site1), username_do_user);
+		usuarioService.deleteUrlDoUsuario(url_do_site1, username_do_user);
+		assertTrue(!usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
 	}
 
 	@Test
 	void testUrlJaRegistrado() {
-		usuarioService.insertLink(new Link("some_link"), "some_user");
-		assertTrue(usuarioService.urlJaRegistrado("some_link", "some_user"));
+		usuarioService.insertLink(new Link(url_do_site1), username_do_user);
+		assertTrue(usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
 	}
 	
 	
