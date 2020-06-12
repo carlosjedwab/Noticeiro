@@ -106,7 +106,7 @@ h2 {
 .username_message {
 	position: relative;
 	float: left;
-	color: green;
+	color:  #100006;
 	font-family: Arial;
 	font-size: var(--message_size);
 }
@@ -114,7 +114,7 @@ h2 {
 .logout_message {
 	position: relative;
 	float: left;
-	color: green;
+	color: #100006;
 	font-family: Arial;
 	font-size: var(--message_size);
 }

@@ -10,6 +10,12 @@
 	--footer_color: #313638;
 }
 
+.my-col{
+	border: 2px;
+	border-color: #313638;
+	
+}
+
 .feed_body {
 	width: 30%;
 	position: absolute;
@@ -30,8 +36,8 @@
 	--width_growth: 0%;
 	
 	position: relative;
-	left: calc(-1*var(--width_growth)/2);
-	width: calc(100% + var(--width_growth));
+	
+	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0;
 	border-radius: 1.172vw 1.172vw 0 0;
@@ -108,7 +114,7 @@
 .add_link_form {
 	width: 100%;
 	top: 9%;
-	position: absolute;
+	position: relative;
 	background: #555555;
 	border-radius: 1.954vw;
 	display: flex;
