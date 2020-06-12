@@ -70,12 +70,12 @@ o banco de dados utilizado na hora de rodar os testes, o que pode ser feito muda
 
 ## Imagens do Noticeiro
 ### Home
-![Home](https://i.ibb.co/f2t3PXG/Screenshot-from-2020-05-21-16-21-42.png)
+![Home](https://i.ibb.co/gz7vwzn/Screenshot-from-2020-06-12-04-09-16.png)
 ### Cadastro
 ![Cadastro](https://i.ibb.co/XkMrszz/Screenshot-from-2020-05-21-16-22-21.png)
 ### Login
 ![Login](https://i.ibb.co/jkR5whj/Screenshot-from-2020-05-21-16-22-32.png)
 ### Feed
-![Feed](https://i.ibb.co/FKhN655/Screenshot-from-2020-05-21-16-23-47.png)
+![Feed](https://i.ibb.co/JjN5DdL/Screenshot-from-2020-06-12-04-07-51.png)
 
 __OBS__: Para remover URLs da lista do feed, posicione o mouse sobre a URL e o ícone de uma lixeira aparecerá. Clique no ícone.
