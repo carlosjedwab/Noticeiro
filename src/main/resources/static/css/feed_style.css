@@ -36,12 +36,13 @@
 	--width_growth: 0%;
 	
 	position: relative;
-	
+	table-layout: fixed;
 	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0;
 	border-radius: 1.172vw 1.172vw 0 0;
 	overflow: hidden;
+	text-overflow: ellipsis; 
 	box-shadow: 0 0.195vw 1.172vw rgba(32,32,32,.3);
 	background: #fafafa;
 	text-align: left;
@@ -149,4 +150,37 @@
 	color: white;
 }
 
+.caixa-forms{
+	padding-top: 1.5rem;
+	display:flex;
+	flex-direction: column;
+}
 
+.caixa-forms h1{
+	font-size: 1.5rem;
+	display: table-cell;
+	vertical-align: middle;
+	text-align:center;
+}
+
+
+.baixo{
+	padding-top: 3rem;	
+}
+
+.caixa-bem-vindo p{
+	font-size: 4rem;
+	font-family: 'Yellowtail', cursive;
+}
+
+.caixa-bem-vindo{
+	display: flex;
+    flex-direction: row-reverse;
+	padding: 1.5rem;
+}
+
+.coluna-esquerda{
+	position: -webkit-sticky;
+ 	position: sticky;
+ 	top:0;	
+}

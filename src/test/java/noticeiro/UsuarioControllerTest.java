@@ -38,9 +38,6 @@ class UsuarioControllerTest {
 	UsuarioRepository repository;
 	
 	@Autowired
-	AuthenticationService authenticationService;
-	
-	@Autowired
 	MockMvc mvc;
 	
 	@Autowired
@@ -63,6 +60,8 @@ class UsuarioControllerTest {
 			.param("password", password_do_user));
 	}
 	
+	// POST methods ---------------------------------------------------------------------
+	
 	@Test
 	void testCadastrarUsuario() throws Exception {
 		assertTrue(usuarioService.getUsuarioByUsername(username_do_user) != null);
@@ -77,6 +76,21 @@ class UsuarioControllerTest {
 		
 		assertTrue(usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
 	}
+	
+	@Test
+	@WithMockUser(username_do_user)
+	void testDeleteLink() throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+			.post("/feed/links/add")
+			.param("url", url_do_site1));
+		mvc.perform(MockMvcRequestBuilders
+			.post("/feed/links/delete")
+			.param("url", url_do_site1));
+		
+		assertTrue(!usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
+	}
+	
+	// GET methods ---------------------------------------------------------------------
 	
 	@SuppressWarnings("unchecked")
 	@Test
@@ -109,20 +123,7 @@ class UsuarioControllerTest {
 		assertTrue(!content.isEmpty());
 	}
 	
-	@Test
-	@WithMockUser(username_do_user)
-	void testDeleteLink() throws Exception {
-		mvc.perform(MockMvcRequestBuilders
-			.post("/feed/links/add")
-			.param("url", url_do_site1));
-		mvc.perform(MockMvcRequestBuilders
-			.post("/feed/links/delete")
-			.param("url", url_do_site1));
-		
-		assertTrue(!usuarioService.urlJaRegistrado(url_do_site1, username_do_user));
-	}
+	// DELETE methods ---------------------------------------------------------------------
 	
-	// Falta o teste do getter da lista de links
-	
-	// Falta o teste para excluir usuário por id, mas precisa ser admin pra isso, então o @WithMockUser nn funciona
+	// Add adminContoller && adminControllerTest
 }
