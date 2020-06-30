@@ -10,11 +10,9 @@ public class Datas {
 	
 	public Datas (@JsonProperty("minDate") String minDate, @JsonProperty("maxDate") String maxDate,
 					@JsonProperty("minTime") String minTime, @JsonProperty("maxTime") String maxTime) {
-		System.out.println("0"  + maxDate + "O");
-		
 		if(minDate.length() != 0)
 			this.minDate = minDate.trim();
-		if(!minDate.isBlank())
+		if(!maxDate.isBlank())
 			this.maxDate = maxDate.trim();
 		if(minTime.length() != 0) 
 			this.minTime = minTime.trim();

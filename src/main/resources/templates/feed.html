@@ -184,7 +184,11 @@
 		<div class = "row justify-content-between align-items-center">
 		
 			<div class = "col caixa-bem-vindo">   
-				<p class = "username_message"> Bem-vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</p>
+				<p class = "username_message"> 
+					Bem-vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!
+					<br>
+					<span th:text="${mensagemDeInfo}"></span>
+				</p>
 			</div>
 		</div>
 		

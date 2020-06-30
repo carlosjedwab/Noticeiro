@@ -125,8 +125,6 @@ public class UsuarioService {
 	public List<String> getTagsByUsername(String username){
 		return repository.findByUsername(username).getTag();
 	}
-
-
 	
 	public List<Publicacao> getPublicationsByUsername(String username) {
 		List<Publicacao> listaPub = new ArrayList<>();
@@ -153,6 +151,7 @@ public class UsuarioService {
 	public List<Publicacao> filterPubsByDate(List<Publicacao> listaPub, String minDate, String maxDate) throws ParseException {
 		List<Publicacao> filteredListaPub = new ArrayList<>();
 		for(Publicacao pub:listaPub) {
+			if(pub.getDate() == null) continue;
 			if (DateUtils.sameDateInterval(pub.getDate(), minDate, maxDate)) {
 				filteredListaPub.add(pub);
 			}
@@ -163,6 +162,7 @@ public class UsuarioService {
 	public List<Publicacao> filterPubsByTime(List<Publicacao> listaPub, String minTime, String maxTime) throws ParseException {
 		List<Publicacao> filteredListaPub = new ArrayList<>();
 		for(Publicacao pub:listaPub) {
+			if(pub.getDate() == null) continue;
 			if (DateUtils.sameTimeInterval(pub.getDate(), minTime, maxTime)) {
 				filteredListaPub.add(pub);
 			}

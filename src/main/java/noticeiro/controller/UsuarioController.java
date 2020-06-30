@@ -25,6 +25,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import noticeiro.LeitorXML;
 import noticeiro.PublicacaoComparator;
 import noticeiro.model.Datas;
+import noticeiro.model.FiltroInfo;
 import noticeiro.model.Link;
 import noticeiro.model.Publicacao;
 import noticeiro.model.ListaDeTags;
@@ -117,9 +118,7 @@ public class UsuarioController {
         
 		return new RedirectView(url, true);
 	}
-	
-	
-	
+
 	// GET methods ---------------------------------------------------------------------
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/feed")
@@ -161,11 +160,15 @@ public class UsuarioController {
         		),
         		minTime, maxTime
         );
+        FiltroInfo filtroInfo = new FiltroInfo(minDate, maxDate, minTime, maxTime);
+        String mensagemDeInfo = filtroInfo.gerarInfoDoFiltro();
+        
         listaPub.sort(new PublicacaoComparator());
 		
 		mv.addObject("links", listaLinks);
 		mv.addObject("tags", listaTags);
 		mv.addObject("publicacoes", listaPub);
+		mv.addObject("mensagemDeInfo", mensagemDeInfo);
 		return mv;
 	}
  
