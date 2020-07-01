@@ -57,7 +57,8 @@ Podem ser inseridas uma tag por vez na lista ou várias de uma vez, no seguinte 
 
 
 As tags compostas devem ser colocadas entre aspas, conforme o exemplo anterior.
-  
+
+## Uso de expressões regulares  
 
 Também está disponível o uso de expressões regulares. Para utilizar uma expressão regular, insira uma tag começando
 com "regex=", sem as aspas, seguida da expressão regular.
