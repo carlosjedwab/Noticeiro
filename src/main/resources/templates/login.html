@@ -25,9 +25,9 @@
       		
         	<form th:action="@{/login}" method="post">
         		<h2> Usuário </h2>
-           		<div><label><input type="text" name="username" placeholder = "Entre seu usuário"/> </label></div>
+           		<div><label><input type="text" name="username" placeholder = "Entre seu usuário" autocomplete="off"/> </label></div>
             	<h2> Senha </h2>
-            	<div><label><input type="password" name="password" placeholder = "Entre sua senha"/> </label></div>
+            	<div><label><input type="password" name="password" placeholder = "Entre sua senha"  autocomplete="off" /> </label></div>
             	<div><input type="submit" value="Entrar"/></div>
        		</form>
        		

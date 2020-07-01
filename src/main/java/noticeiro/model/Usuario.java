@@ -24,12 +24,14 @@ public class Usuario {
 	@Pattern(regexp = "[^\\s]\\S*[^\\s]\\S*[^\\s]")
 	String password;
 	List<Link> links;
+	List<String> tag;
 
 	public Usuario(@JsonProperty("username") String username,
 				   @JsonProperty("password") String password) {
 		this.username = username;
 		this.password = password;
 		this.links = new ArrayList<>();
+		this.tag = new ArrayList<>();
 	}
 	
 	public void insertLink(Link link) {
@@ -68,5 +70,15 @@ public class Usuario {
 		this.links = links;
 	}
 	
+	public List<String> getTag() {
+		return tag;
+	}
+
+	public void setTag(List<String> tag) {
+		this.tag = tag;
+	}
+	public void insertTag(String tag) {
+		this.tag.add(tag);
+	}
 	
 }

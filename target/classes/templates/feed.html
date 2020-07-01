@@ -3,19 +3,26 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Noticeiro - Feed</title>
+ <!--        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+ -->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrapCss/bootstrap.min.css}" href="../static/css/bootstrapCss/bootstrap.min.css"/>
+	    
+		
         <link rel="stylesheet" type="text/css" th:href="@{/css/feed_style.css}" href="../static/css/feed_style.css">
         <link rel="stylesheet" type="text/css" th:href="@{/css/noticeiro_style.css}" href="../static/css/noticeiro_style.css" >
         <link rel = "icon" type = "image/png" th:href = "@{/images/N.png}">
-        
+        <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
         <meta charset="utf-8"/>
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	    <meta name="description" content=""/>
 	    <meta name="viewport" content="width=device-width"/>
 	    <base href="/"/>
-	    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrapCss/bootstrap.min.css}" href="../static/css/bootstrapCss/bootstrap.min.css"/>
-	    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-	    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-	    <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css"></link>
+		
+
     </head>
        
     <body>
@@ -37,29 +44,28 @@
 	    </div>
     
     	
-    <div class="container">	
+    <div class="container-fluid">	
     
-		<div class = "row justify-content-between align-items-center">
 		
-		<div class = "col">   
-		<p class = "username_message"> Bem-vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!</p>
-		</div>
-		</div>
+		<div class="row justify-content-between  ">
+		<div class="col-4 coluna-esquerda">
 		
-		<div class="row mb-3">
 		
-	    	<div class = "col justify-content-center">   
-	       <form th:action="@{/feed/links/add}" method="post" class = "add_link_form">
-		 	  <label class="insert_link"><input type="text" name="url" placeholder="Novo link"/> </label>
-		 	  <p th:if="${param.url_error}" class = "url_error">URL já existente.</p>
-		  	  <p th:if="${param.invalid}" class = "url_error">URL inválida.</p> 
-		 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
-	       </form>
-	     </div>
-	     </div>
+			<div class="row ">
+			
+		    	<div class = "col justify-content-center m-2 baixo">   
+		       <form th:action="@{/feed/links/add}" method="post" class = "add_link_form">
+			 	  <label class="insert_link"><input type="text" name="url" placeholder="Novo link"/> </label>
+			 	  <p th:if="${param.url_error}" class = "url_error">URL já existente.</p>
+			  	  <p th:if="${param.invalid}" class = "url_error">URL inválida.</p> 
+			 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
+		       </form>
+		     </div>
+		     </div>
 	     
-	     <div class = "row mb-3">
-	     <div class = "col justify-content-center">
+	     
+	     <div class = "row ">
+	     <div class = "col justify-content-center m-2">
 	       <table class = "links_table">
 		            <thead>
 		                <tr><th> Lista de URLs</th></tr>
@@ -69,9 +75,47 @@
 		                    <td> Não há links cadastrados </td>
 		                </tr>
 		                <tr th:each="link : ${links}">
+		  
 		                    <td><span th:text="${link.url}"> URL </span>
 		                    <form th:action="@{/feed/links/delete}" th:method="post" class = "delete">
 		                    	<input type="hidden" name="url" th:value=${link.url} />
+		                    	<input type="image" th:src="@{images/lixo.png}" alt="submit" class="delete_button"/>
+		                  	</form> 
+		                	</td>	
+		                	
+		                </tr>     
+		            </tbody>
+				</table>
+			</div>
+	   		</div>   		
+	  	   
+	  	   
+	  	   <div class="row">
+		
+	    	<div class = "col justify-content-center m-2">   
+	       <form th:action="@{/feed/tag/add}" method="post" class = "add_link_form">
+		 	  <label class="insert_link"><input type="text" name="string" placeholder="Novas tags"/> </label>
+		 	  <p th:if="${param.tag_error}" class = "url_error">Tag já existente.</p>
+		 	  <p th:if="${param.invalid_tag}" class = "url_error">Tag inválida.</p> 
+		 	  <input type="image" th:src="@{images/add_black.png}" alt="submit" class="add_button"/>
+	       </form>
+	     </div>
+	     </div>
+	     
+	  	  <div class = "row ">
+	     <div class = "col justify-content-center m-2">
+	       <table class = "links_table">
+		            <thead>
+		                <tr><th> Lista de Tags</th></tr>
+		            </thead>
+		            <tbody>
+		                <tr th:if="${tags.empty}">
+		                    <td> Não há tags cadastradas </td>
+		                </tr>
+		                <tr th:each="tag : ${tags}">
+		                    <td><span th:text="${tag}"> Tag </span>
+		                    <form th:action="@{/feed/tag/delete}" th:method="post" class = "delete">
+		                    	<input type="hidden" name="string" th:value="${tag}" />
 		                    	<input type="image" th:src="@{images/lixo.png}" alt="submit" class="delete_button"/>
 		                  	</form> 
 		                	</td>	
@@ -79,8 +123,46 @@
 		            </tbody>
 				</table>
 			</div>
-	   		</div>   		
+	   		</div>   
+	   		
+	   		
+	   		<div class="caixa-forms" > 
+	   			<h1> Ferramentas de filtragem</h1>
+		   		<div >
+					<div>
+					<form th:action="@{/feed/data}" th:method="post"  >
+					  <div class="form-row">
+					    <div class="col">
+					     	<input type="date" name="minDate" class="form-control" aria-describedby="minDate"/>
+					     	<small id="minDate" class="form-text text-muted"> Data inicial</small>
+					    </div>
+					     <div class="col">
+					      <input type="time" name="minTime" placeholder="Horario Minimo"  class="form-control" aria-describedby="minTime"/>
+					     	<small id="minTime" class="form-text text-muted"> Horário do dia inicial</small>
+					    </div>
+					  </div>
+					  
+					 <div class="form-row">
+				
+				    	<div class="col">
+					         <input type="date" name="maxDate"  class="form-control" aria-describedby="maxDate"/>
+					     	<small id="maxDate" class="form-text text-muted"> Data final</small>
+					    </div>
+					    <div class="col">
+					       <input type="time" name="maxTime"  placeholder="Horario Maximo"  class="form-control" aria-describedby="maxTime"/>
+					     	<small id="maxTime" class="form-text text-muted">  Horário do dia final</small>
+					    </div>
+					    </div>
+					     <div class="form-row">
+					    <button type="submit" class="btn btn-primary">Filtrar</button>
+					  </div>
+					</form>
+					</div>
+				</div>
+	   		</div>
+	   		
 	  	   
+	  </div>
     	<!--  <div class="row">
 		 		
 			  	<div class="col-4 justify-content-around my-col" th:each="publicacao: ${publicacoes}">
@@ -96,7 +178,22 @@
 					</div>
 				</div> 
 				-->
-				<div class= "row mb-3">
+		
+		<div class="col-8">
+		
+		<div class = "row justify-content-between align-items-center">
+		
+			<div class = "col caixa-bem-vindo">   
+				<p class = "username_message"> 
+					Bem-vindo ao seu feed de notícias, [[${#httpServletRequest.remoteUser}]]!
+					<br>
+					<span th:text="${mensagemDeInfo}"></span>
+				</p>
+			</div>
+		</div>
+		
+		
+		<div class= "row mb-3">
 				<div class ="col justify-content-center">
 				<!-- <div class="card-columns"> -->
 		 		
@@ -105,16 +202,19 @@
 						<h4 class="class-title"><span th:text="${publicacao.title}">Title</span></h4>
 			 			<p  class="class-text">
 			 				Fonte: 
-			 				<span th:text="${publicacao.feedTitle}"> </span>
-			 				<!--<span th:text="${publicacao.source}"></span>-->
+			 				<span th:text="${publicacao.feedTitle}"> </span>,
+			 				<span th:text="${publicacao.source}"></span>,
+			 				<span th:text="${publicacao.date}"></span>
 			 			</p>
 			 			<a class="stretched-link" th:href="${publicacao.link}" target="_blank" rel="noopener noreferrer"> </a>
 					</div>
 					</div>
 				</div> 
 				<!-- </div> -->
-		</div>				
+		</div>	
+		</div>			
 		</div>
+		</div>	
 			
 	  	  
 	
