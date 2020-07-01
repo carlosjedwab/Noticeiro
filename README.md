@@ -16,6 +16,9 @@ Este projeto é implementado em Java Spring MVC, utilizando o banco de dados Mon
 * Banco de dados
     * MongoDB
 
+* Outras bibliotecas utilizadas
+    * Bootstrap
+
 ## Como executar
 Primeiramente, é necessário ter o MongoDB em execução, pois o web app irá interagir
 com ele para armazenamento dos dados.
@@ -47,6 +50,31 @@ Com o MongoDB em funcionamento, há duas maneiras de executar o projeto:
     * Clique com o botão direito na pasta principal do projeto e execute o comando __Run as -> Spring Boot Application__
     * Com isto, o projeto estará sendo executado e o site poderá ser acessado por meio da url __localhost:8080__
 
+## Como utilizar as tags
+Podem ser inseridas uma tag por vez na lista ou várias de uma vez, no seguinte formato:
+
+```Brasil "Testes automatizados" Governo Estudantes "Programar em Java"```
+
+
+As tags compostas devem ser colocadas entre aspas, conforme o exemplo anterior.
+  
+
+Também está disponível o uso de expressões regulares. Para utilizar uma expressão regular, insira uma tag começando
+com "regex=", sem as aspas, seguida da expressão regular.
+
+
+Exemplo: Mostrar notícias que contenham título ou descrição começando apenas com letra C:
+
+```regex=^C.*```
+ 
+## Como utilizar filtros de data e hora
+Para utilizar os filtros de __data__, o usuário tem a opção de escolher uma __data mínima__ e uma __data máxima__, para que só sejam mostradas publicações pertencentes ao intervalo informado.
+Também é possível omitir uma das datas, montando intervalos abertos.
+
+Para utilizar os filtros de __hora__, o usuário tem a opção de escolher uma __hora mínima__ e uma __hora máxima__, para que só sejam mostradas publicações pertencentes ao intervalo informado.
+Também é possível omitir uma das horas, montando intervalos abertos.
+Obs: É importante notar que o intervalo de horas é aplicado a todos os dias pertencentes ao intervalo de datas.
+
 ## Configuração da conexão com o banco de dados
 As configurações da conexão do web app com o banco de dados podem ser encontradas no arquivo
 __src/main/resources/application.properties__ e por padrão são as seguintes:
@@ -76,6 +104,6 @@ o banco de dados utilizado na hora de rodar os testes, o que pode ser feito muda
 ### Login
 ![Login](https://i.ibb.co/jkR5whj/Screenshot-from-2020-05-21-16-22-32.png)
 ### Feed
-![Feed](https://i.ibb.co/6XLWdx1/Screenshot-from-2020-06-12-15-27-54.png)
+![Feed](https://i.ibb.co/RjykDyn/Screenshot-from-2020-06-30-23-20-15.png)
 
 __OBS__: Para remover URLs da lista do feed, posicione o mouse sobre a URL e o ícone de uma lixeira aparecerá. Clique no ícone.
